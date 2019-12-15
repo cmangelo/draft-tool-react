@@ -2,12 +2,13 @@ import './App.css';
 
 import React from 'react';
 
-import { Login } from './views/Login';
+import { Tiers } from './views/Tiers';
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Login></Login>
+      {/* <Login></Login> */}
+      <Tiers></Tiers>
     </div>
   );
 }
