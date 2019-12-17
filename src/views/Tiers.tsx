@@ -1,6 +1,7 @@
 import { normalize, schema } from 'normalizr';
 import React from 'react';
 
+import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import { Player } from './Player';
