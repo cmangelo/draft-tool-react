@@ -7,5 +7,5 @@ export const Player: React.FC<{ player: IPlayer }> = (props: { player: IPlayer }
         <div>
             <span>{props.player.name}</span>
         </div>
-    )
+    );
 }

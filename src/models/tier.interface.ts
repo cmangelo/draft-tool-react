@@ -1,4 +1,4 @@
-export interface Tier {
+export interface ITier {
     _id: string;
     tierNumber: number;
     startingAtRank: number;
