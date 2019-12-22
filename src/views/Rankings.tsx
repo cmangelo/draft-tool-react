@@ -50,7 +50,6 @@ class Rankings extends React.Component<any, RankingsState> {
 
     render() {
         const { players, groups, tiers } = this.props;
-        console.log(players);
         return (
             <div>
                 {this.createGroups()}
