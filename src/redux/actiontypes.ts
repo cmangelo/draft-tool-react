@@ -1,0 +1,3 @@
+export const LOAD_PLAYERS = '[Rankings] Load Players';
+export const LOAD_TIERS = '[Rankings] Load Tiers';
+export const LOAD_GROUPS = '[Rankings] Load Groups';

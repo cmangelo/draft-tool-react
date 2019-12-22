@@ -2,13 +2,13 @@ import './App.css';
 
 import React from 'react';
 
-import { Tiers } from './views/Tiers';
+import Rankings from './views/Rankings';
 
 const App: React.FC = () => {
   return (
     <div className="App">
       {/* <Login></Login> */}
-      <Tiers></Tiers>
+      <Rankings></Rankings>
     </div>
   );
 }
