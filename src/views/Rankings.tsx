@@ -1,11 +1,12 @@
-import { normalize, schema } from 'normalizr';
 import React from 'react';
 import { connect } from 'react-redux';
 
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
-import { loadGroups, loadPlayers, loadTiers } from '../redux/actions';
+import { getGroupsAndTiers } from '../redux/effects/getGroupsAndTiers';
+import { getPlayersEffect } from '../redux/effects/getPlayers';
+import { getGroups, getPlayers, getTiers } from '../redux/reducers/entities';
 import { Player } from './Player';
 import { PlayerGroup } from './PlayerGroup';
 
@@ -18,42 +19,12 @@ interface RankingsState {
 class Rankings extends React.Component<any, RankingsState> {
     constructor(props: any) {
         super(props);
-        this.state = {
-            players: {},
-            groups: {},
-            tiers: {}
-        };
+
     }
 
     async componentDidMount() {
-        let response = await fetch('http://localhost:3000/players', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGU4ODVmMmQ3NDk3ZDRlNGM3NDY3MWUiLCJpYXQiOjE1NzU4NjA3NDJ9.4f8qdnYxko3cXthkzrOVBH4p7UYp3XyS9nmTyq4lM9M'
-            }
-        });
-        let playersJSON = await response.json();
-        const playerSchema = new schema.Entity('players', {}, { idAttribute: '_id' });
-        const players = normalize(playersJSON, [playerSchema]);
-        console.log(players)
-        this.props.loadPlayers(players.entities.players);
-
-        let response2 = await fetch('http://localhost:3000/players/groups', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGU4ODVmMmQ3NDk3ZDRlNGM3NDY3MWUiLCJpYXQiOjE1NzU4NjA3NDJ9.4f8qdnYxko3cXthkzrOVBH4p7UYp3XyS9nmTyq4lM9M'
-            }
-        });
-        let groupsJSON = await response2.json();
-        const groupSchema = new schema.Entity('groups', {}, { idAttribute: '_id' });
-        const tierSchema = new schema.Entity('tiers', {}, { idAttribute: '_id' });
-        const groups = normalize(groupsJSON.groups, [groupSchema]);
-        const tiers = normalize(groupsJSON.tiers, [tierSchema]);
-
-        this.props.loadGroups(groups.entities.groups);
-        this.props.loadTiers(tiers.entities.tiers);
+        this.props.getPlayers();
+        this.props.getGroupsAndTiers();
     }
 
     createTierArray() {
@@ -66,7 +37,9 @@ class Rankings extends React.Component<any, RankingsState> {
     }
 
     createGroups() {
-        const groups = Object.keys(this.state.groups).map((id: string) => this.state.groups[id]);
+        if (!this.props.tiers) return;
+        const groups = Object.keys(this.props.groups).map((id: string) => this.props.groups[id]);
+        // console.log(groups);
         return groups.map((group: IGroup) => {
 
             return (
@@ -76,15 +49,24 @@ class Rankings extends React.Component<any, RankingsState> {
     }
 
     render() {
+        const { players, groups, tiers } = this.props;
+        console.log(players);
         return (
             <div>
                 {this.createGroups()}
+                {/* {players} */}
             </div>
         );
     }
 }
 
+const mapStateToProps = (state: any) => ({
+    players: getPlayers(state),
+    tiers: getTiers(state),
+    groups: getGroups(state)
+});
+
 export default connect(
-    null,
-    { loadPlayers, loadGroups, loadTiers }
+    mapStateToProps,
+    { getGroupsAndTiers, getPlayers: getPlayersEffect }
 )(Rankings);

@@ -3,6 +3,10 @@ import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import * as types from './actiontypes';
 
+export const loadPlayersPending = () => ({
+    type: types.LOAD_PLAYERS_PENDING
+});
+
 export const loadPlayers = (players: { [id: string]: IPlayer }) => ({
     type: types.LOAD_PLAYERS,
     payload: {

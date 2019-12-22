@@ -3,11 +3,17 @@ import * as types from '../actiontypes';
 const initialState = {
     players: {},
     tiers: {},
-    groups: {}
+    groups: {},
+    loading: false
 }
 
 export default function (state = initialState, action: { type: string, payload: any }) {
     switch (action.type) {
+        case types.LOAD_PLAYERS_PENDING:
+            return {
+                ...state,
+                loading: true
+            }
         case types.LOAD_PLAYERS:
             return {
                 ...state,
@@ -27,3 +33,7 @@ export default function (state = initialState, action: { type: string, payload: 
             return state;
     }
 };
+
+export const getPlayers = (state: any) => state.entities.players;
+export const getTiers = (state: any) => state.entities.tiers;
+export const getGroups = (state: any) => state.entities.groups;
