@@ -11,7 +11,10 @@ export const PlayerGroup: React.FC<{ group: IGroup }> = (props: { group: IGroup 
         return (props.group.tiers as Array<ITier>).map((tier: ITier) => {
             return (
                 <div key={tier._id}>
-                    <span className="tier-number">Tier {tier.tierNumber}</span>
+                    <div className="tier-header">
+                        <div className="tier-number">Tier {tier.tierNumber}</div>
+                        <hr />
+                    </div>
                     {listPlayers(tier)}
                 </div>
             )

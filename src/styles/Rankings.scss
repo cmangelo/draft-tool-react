@@ -6,14 +6,36 @@
     .Group {
         width: 100%;
 
+        .tier-header {
+            background: white;
+            padding-bottom: 5px;
+            position: sticky;
+            top: 0;
+        }
+
         .tier-number {
-            font-size: 22px;
+
+            line-height: .5;
+            background-color: white;
+            bottom: -3px;
+            color: #8bbabb;
+            font-size: .7em;
+            font-weight: 600;
+            margin: 0 auto;
+            padding: 0 15px;
+            position: relative;
+            text-align: center;
+            width: fit-content;
+        }
+
+        hr {
+            margin: 0;
+            background-color: #8bbabb;
         }
 
         .player-row {
-            border-bottom: $default-border-bottom;
             display: flex;
-            padding: 5px 0;
+            padding: 4px 0;
             width: 100%;
 
             &:last-of-type {
@@ -23,6 +45,7 @@
             .player-rank {
                 color: $secondary-font-color;
                 flex-basis: 15%;
+                font-size: .9em;
                 margin: auto 0;
                 padding-right: 20px;
                 text-align: right;
@@ -30,6 +53,7 @@
 
             .player-name {
                 flex-grow: 1;
+                font-size: .9em;
                 line-height: 1.2;
 
                 .player-team-info {
@@ -40,6 +64,8 @@
 
             .player-adp {
                 flex-basis: 15%;
+                font-size: .9em;
+                font-weight: lighter;
                 line-height: 1.2;
                 margin: auto 0;
                 padding-right: 20px;
@@ -47,9 +73,8 @@
 
                 div {
                     color: $secondary-font-color;
-                    font-size: .6em;
+                    font-size: .7em;
                     font-weight: bold;
-                    ;
                 }
             }
 
