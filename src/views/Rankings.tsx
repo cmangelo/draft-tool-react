@@ -6,8 +6,7 @@ import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import { getGroupsAndTiers } from '../redux/effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../redux/effects/getPlayers';
-import { getGroups, getPlayers, getTiers } from '../redux/reducers/entities';
-import { Player } from './Player';
+import { getGroupsWithPlayers } from '../redux/reducers/entities';
 import { PlayerGroup } from './PlayerGroup';
 
 interface RankingsState {
@@ -17,31 +16,15 @@ interface RankingsState {
 }
 
 class Rankings extends React.Component<any, RankingsState> {
-    constructor(props: any) {
-        super(props);
 
-    }
-
-    async componentDidMount() {
+    componentDidMount() {
         this.props.getPlayers();
         this.props.getGroupsAndTiers();
     }
 
-    createTierArray() {
-        const players = Object.keys(this.state.players).map((id: string) => this.state.players[id]);
-        return players.map((player: IPlayer) => {
-            return (
-                <Player player={player} key={player._id}></Player>
-            );
-        });
-    }
-
     createGroups() {
-        if (!this.props.tiers) return;
-        const groups = Object.keys(this.props.groups).map((id: string) => this.props.groups[id]);
-        // console.log(groups);
-        return groups.map((group: IGroup) => {
-
+        if (!this.props.groupsWithPlayers) return;
+        return this.props.groupsWithPlayers.map((group: IGroup) => {
             return (
                 <PlayerGroup group={group} key={group._id}></PlayerGroup>
             );
@@ -49,20 +32,18 @@ class Rankings extends React.Component<any, RankingsState> {
     }
 
     render() {
-        const { players, groups, tiers } = this.props;
+        const { groupsWithPlayers } = this.props;
+        console.log(groupsWithPlayers);
         return (
-            <div>
+            <div className="Rankings">
                 {this.createGroups()}
-                {/* {players} */}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    players: getPlayers(state),
-    tiers: getTiers(state),
-    groups: getGroups(state)
+    groupsWithPlayers: getGroupsWithPlayers(state)
 });
 
 export default connect(

@@ -1,0 +1,65 @@
+@import './Variables.scss';
+
+.Rankings {
+    display: flex;
+
+    .Group {
+        width: 100%;
+
+        .tier-number {
+            font-size: 22px;
+        }
+
+        .player-row {
+            border-bottom: $default-border-bottom;
+            display: flex;
+            padding: 5px 0;
+            width: 100%;
+
+            &:last-of-type {
+                border: none;
+            }
+
+            .player-rank {
+                color: $secondary-font-color;
+                flex-basis: 15%;
+                margin: auto 0;
+                padding-right: 20px;
+                text-align: right;
+            }
+
+            .player-name {
+                flex-grow: 1;
+                line-height: 1.2;
+
+                .player-team-info {
+                    color: $ternary-font-color;
+                    font-size: .7em;
+                }
+            }
+
+            .player-adp {
+                flex-basis: 15%;
+                line-height: 1.2;
+                margin: auto 0;
+                padding-right: 20px;
+                text-align: right;
+
+                div {
+                    color: $secondary-font-color;
+                    font-size: .6em;
+                    font-weight: bold;
+                    ;
+                }
+            }
+
+            button {
+                background-color: $button-color;
+                color: white;
+                font-size: 14px;
+                height: fit-content;
+                margin: auto 0;
+            }
+        }
+    }
+}
