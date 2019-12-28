@@ -5,7 +5,14 @@ import { IPlayer } from '../../models/player.interface';
 import { ITier } from '../../models/tier.interface';
 import * as types from '../actiontypes';
 
-const initialState = {
+interface State {
+    players: { [key: string]: IPlayer }
+    tiers: { [key: string]: ITier }
+    groups: { [key: string]: IGroup },
+    loading: boolean
+}
+
+const initialState: State = {
     players: {},
     tiers: {},
     groups: {},
@@ -34,6 +41,18 @@ export default function (state = initialState, action: { type: string, payload: 
                 ...state,
                 groups: action.payload.groups
             }
+        case types.DRAFT_PLAYER:
+            const playerId = action.payload.playerId as string;
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [playerId]: {
+                        ...state.players[playerId],
+                        drafted: true
+                    }
+                }
+            }
         default:
             return state;
     }
@@ -48,12 +67,18 @@ export const getGroupsWithPlayers = createSelector(
     (players: { [_id: string]: IPlayer }, tiers: { [_id: string]: ITier }, groups: { [_id: string]: IGroup }) => {
         if (!Object.keys(players).length || !Object.keys(tiers).length || !Object.keys(groups).length) return [];
         //change this filter to be visible players -- we'll need to keep track of which players are visible in Rankings state
-        return Object.keys(groups).map(key => groups[key]).filter(group => group.position === 0).map(group => {
-            group.tiers = (group.tiers as Array<string>).map((tierId: string) => tiers[tierId]).map(tier => {
-                tier.players = (tier.players as Array<string>).map(playerId => players[playerId]);
-                return tier;
-            });
-            return group;
-        }).sort((a, b) => a.position > b.position ? 1 : -1);
+        console.log(groups)
+        return Object.keys(groups)
+            .map(key => groups[key])
+            .filter(group => group.position === 0)
+            .map(group => {
+                const groupTiers = (group.tiers as Array<string>)
+                    .map((tierId: string) => tiers[tierId])
+                    .map(tier => {
+                        const tierPlayers = (tier.players as Array<string>).map(playerId => players[playerId]);
+                        return { ...tier, players: tierPlayers };
+                    });
+                return { ...group, tiers: groupTiers };
+            }).sort((a, b) => a.position > b.position ? 1 : -1);
     }
 );

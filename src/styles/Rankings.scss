@@ -11,26 +11,36 @@
             padding-bottom: 5px;
             position: sticky;
             top: 0;
-        }
 
-        .tier-number {
 
-            line-height: .5;
-            background-color: white;
-            bottom: -3px;
-            color: $accent-color;
-            font-size: .7em;
-            font-weight: 600;
-            margin: 0 auto;
-            padding: 0 15px;
-            position: relative;
-            text-align: center;
-            width: fit-content;
-        }
+            .tier-number {
+                line-height: .5;
+                background-color: white;
+                bottom: -3px;
+                color: $accent-color;
+                font-size: .7em;
+                font-weight: 600;
+                margin: 0 auto;
+                padding: 0 15px;
+                position: relative;
+                text-align: center;
+                width: fit-content;
+            }
 
-        hr {
-            margin: 0;
-            background-color: $accent-color;
+            hr {
+                margin: 0;
+                background-color: $accent-color;
+            }
+
+            &.all-drafted {
+                .tier-number {
+                    color: $light-grey;
+                }
+
+                hr {
+                    background-color: $light-grey;
+                }
+            }
         }
 
         .player-row {
@@ -84,6 +94,12 @@
                 font-size: 14px;
                 height: fit-content;
                 margin: auto 0;
+            }
+
+            &.drafted {
+                button {
+                    background-color: $light-grey;
+                }
             }
         }
     }

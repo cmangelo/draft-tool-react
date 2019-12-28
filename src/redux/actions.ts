@@ -28,3 +28,9 @@ export const loadGroups = (groups: { [id: string]: IGroup }) => ({
     }
 });
 
+export const draftPlayer = (playerId: string) => ({
+    type: types.DRAFT_PLAYER,
+    payload: {
+        playerId
+    }
+});

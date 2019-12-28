@@ -9,4 +9,5 @@ export interface IPlayer {
     notes: string;
     position: number;
     value: number;
+    drafted: boolean;
 }
