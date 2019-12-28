@@ -18,7 +18,7 @@
             line-height: .5;
             background-color: white;
             bottom: -3px;
-            color: #8bbabb;
+            color: $accent-color;
             font-size: .7em;
             font-weight: 600;
             margin: 0 auto;
@@ -30,7 +30,7 @@
 
         hr {
             margin: 0;
-            background-color: #8bbabb;
+            background-color: $accent-color;
         }
 
         .player-row {
@@ -79,7 +79,7 @@
             }
 
             button {
-                background-color: $button-color;
+                background-color: $secondary-color;
                 color: white;
                 font-size: 14px;
                 height: fit-content;
