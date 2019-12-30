@@ -1,4 +1,4 @@
-export enum EPlayer {
+export enum EPosition {
     QB,
     RB,
     WR,

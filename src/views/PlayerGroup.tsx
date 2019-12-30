@@ -8,14 +8,15 @@ import { PlayerRow } from './PlayerRow';
 export const PlayerGroup: React.FC<{ group: IGroup, draftPlayer: Function }> = (props: { group: IGroup, draftPlayer: Function }) => {
 
     const allPlayersInTierDrafted = (tier: ITier) => {
-        return (tier.players as Array<IPlayer>).every(player => player.drafted);
+        return (tier.players as Array<IPlayer>).every(player => player.drafted)
+            ? "all-drafted" : ""
     }
 
     const createTiers = () => {
         return (props.group.tiers as Array<ITier>).map((tier: ITier) => {
             return (
                 <div key={tier._id}>
-                    <div className={"tier-header " + (allPlayersInTierDrafted(tier) ? "all-drafted" : "")}>
+                    <div className={"tier-header " + (allPlayersInTierDrafted(tier))}>
                         <div className="tier-number">Tier {tier.tierNumber}</div>
                         <hr />
                     </div>

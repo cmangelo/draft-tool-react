@@ -1,3 +1,9 @@
+div::-webkit-scrollbar,
+div::-webkit-scrollbar-track {
+    display: none;
+}
+
+
 button {
     border: none;
     border-radius: 15px;

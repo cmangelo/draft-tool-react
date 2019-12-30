@@ -1,9 +1,12 @@
 import { createSelector } from 'reselect';
 
+import { EPosition } from '../../models/enums/player.enum';
 import { IGroup } from '../../models/group.interface';
 import { IPlayer } from '../../models/player.interface';
 import { ITier } from '../../models/tier.interface';
 import * as types from '../actiontypes';
+
+const showGroups = window.screen.width < 650 ? [EPosition.QB] : [EPosition.QB, EPosition.RB, EPosition.WR, EPosition.TE];
 
 interface State {
     players: { [key: string]: IPlayer }
@@ -70,7 +73,7 @@ export const getGroupsWithPlayers = createSelector(
         console.log(groups)
         return Object.keys(groups)
             .map(key => groups[key])
-            .filter(group => group.position === 0)
+            .filter(group => showGroups.includes(group.position))
             .map(group => {
                 const groupTiers = (group.tiers as Array<string>)
                     .map((tierId: string) => tiers[tierId])

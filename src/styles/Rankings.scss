@@ -4,6 +4,9 @@
     display: flex;
 
     .Group {
+        max-height: 100vh;
+        overflow: auto;
+        padding: 0 10px;
         width: 100%;
 
         .tier-header {
