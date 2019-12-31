@@ -1,10 +1,11 @@
 import { createSelector } from 'reselect';
 
-import { EPosition } from '../../models/enums/player.enum';
-import { IGroup } from '../../models/group.interface';
-import { IPlayer } from '../../models/player.interface';
-import { ITier } from '../../models/tier.interface';
-import * as types from '../actiontypes';
+import { entitiesActionTypes } from '../actions/entities';
+import { rankingsActionTypes } from '../actions/rankings';
+import { EPosition } from '../models/enums/player.enum';
+import { IGroup } from '../models/group.interface';
+import { IPlayer } from '../models/player.interface';
+import { ITier } from '../models/tier.interface';
 
 const showGroups = window.screen.width < 650 ? [EPosition.QB] : [EPosition.QB, EPosition.RB, EPosition.WR, EPosition.TE];
 
@@ -24,27 +25,27 @@ const initialState: State = {
 
 export default function (state = initialState, action: { type: string, payload: any }) {
     switch (action.type) {
-        case types.LOAD_PLAYERS_PENDING:
+        case entitiesActionTypes.LOAD_PLAYERS_PENDING:
             return {
                 ...state,
                 loading: true
             }
-        case types.LOAD_PLAYERS:
+        case entitiesActionTypes.LOAD_PLAYERS:
             return {
                 ...state,
                 players: action.payload.players
             }
-        case types.LOAD_TIERS:
+        case entitiesActionTypes.LOAD_TIERS:
             return {
                 ...state,
                 tiers: action.payload.tiers
             }
-        case types.LOAD_GROUPS:
+        case entitiesActionTypes.LOAD_GROUPS:
             return {
                 ...state,
                 groups: action.payload.groups
             }
-        case types.DRAFT_PLAYER:
+        case rankingsActionTypes.DRAFT_PLAYER:
             const playerId = action.payload.playerId as string;
             return {
                 ...state,

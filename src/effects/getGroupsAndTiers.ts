@@ -1,7 +1,7 @@
 import { normalize, schema } from 'normalizr';
 import superagent from 'superagent';
 
-import { loadGroups, loadPlayersPending, loadTiers } from '../actions';
+import { loadGroups, loadPlayersPending, loadTiers } from '../actions/entities';
 
 export const getGroupsAndTiers = () => {
     return async (dispatch: any) => {

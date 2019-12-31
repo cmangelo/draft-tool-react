@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { draftPlayer } from '../actions/rankings';
+import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
+import { getPlayersEffect } from '../effects/getPlayers';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
-import { draftPlayer } from '../redux/actions';
-import { getGroupsAndTiers } from '../redux/effects/getGroupsAndTiers';
-import { getPlayersEffect } from '../redux/effects/getPlayers';
-import { getGroupsWithPlayers } from '../redux/reducers/entities';
+import { getGroupsWithPlayers } from '../reducers/entities';
 import { PlayerGroup } from './PlayerGroup';
 
 

@@ -1,7 +1,7 @@
 import { normalize, schema } from 'normalizr';
 import superagent from 'superagent';
 
-import { loadPlayers } from '../actions';
+import { loadPlayers } from '../actions/entities';
 
 export const getPlayersEffect = () => {
     return async (dispatch: any) => {
