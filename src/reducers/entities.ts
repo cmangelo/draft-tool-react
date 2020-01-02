@@ -1,13 +1,8 @@
-import { createSelector } from 'reselect';
-
 import { entitiesActionTypes } from '../actions/entities';
 import { rankingsActionTypes } from '../actions/rankings';
-import { EPosition } from '../models/enums/player.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
-
-const showGroups = window.screen.width < 650 ? [EPosition.QB] : [EPosition.QB, EPosition.RB, EPosition.WR, EPosition.TE];
 
 interface State {
     players: { [key: string]: IPlayer }
@@ -66,23 +61,3 @@ export const getPlayers = (state: any) => state.entities.players;
 export const getTiers = (state: any) => state.entities.tiers;
 export const getGroups = (state: any) => state.entities.groups;
 
-export const getGroupsWithPlayers = createSelector(
-    [getPlayers, getTiers, getGroups],
-    (players: { [_id: string]: IPlayer }, tiers: { [_id: string]: ITier }, groups: { [_id: string]: IGroup }) => {
-        if (!Object.keys(players).length || !Object.keys(tiers).length || !Object.keys(groups).length) return [];
-        //change this filter to be visible players -- we'll need to keep track of which players are visible in Rankings state
-        console.log(groups)
-        return Object.keys(groups)
-            .map(key => groups[key])
-            .filter(group => showGroups.includes(group.position))
-            .map(group => {
-                const groupTiers = (group.tiers as Array<string>)
-                    .map((tierId: string) => tiers[tierId])
-                    .map(tier => {
-                        const tierPlayers = (tier.players as Array<string>).map(playerId => players[playerId]);
-                        return { ...tier, players: tierPlayers };
-                    });
-                return { ...group, tiers: groupTiers };
-            }).sort((a, b) => a.position > b.position ? 1 : -1);
-    }
-);

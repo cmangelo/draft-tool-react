@@ -2,8 +2,6 @@ import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 
-// import * as types from './actiontypes';
-
 export const entitiesActionTypes = {
     LOAD_PLAYERS_PENDING: '[Rankings] Load Players Pending',
     LOAD_PLAYERS: '[Rankings] Load Players',

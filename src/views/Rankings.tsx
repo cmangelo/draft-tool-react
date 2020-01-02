@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { draftPlayer } from '../actions/rankings';
+import { draftPlayer, togglePositionVisible } from '../actions/rankings';
 import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../effects/getPlayers';
+import { EPosition } from '../models/enums/player.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
-import { getGroupsWithPlayers } from '../reducers/entities';
+import { getVisibleGroups } from '../reducers/rankings';
+import { getGroupsWithPlayers } from '../selectors/rankings';
+import { GroupSelector } from './GroupSelector';
 import { PlayerGroup } from './PlayerGroup';
 
 
@@ -36,26 +39,30 @@ class Rankings extends React.Component<any, RankingsState> {
     render() {
         return (
             <div className="Rankings">
-                {this.createGroups()}
+                <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
+                <div className="groups">
+                    {this.createGroups()}
+                </div>
             </div>
         );
     }
 }
 
 const mapStateToProps = (state: any) => ({
-    groupsWithPlayers: getGroupsWithPlayers(state)
+    groupsWithPlayers: getGroupsWithPlayers(state),
+    visibleGroups: getVisibleGroups(state)
 });
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
         getGroupsAndTiers: () => dispatch(getGroupsAndTiers()),
         getPlayers: () => dispatch(getPlayersEffect()),
-        draftPlayer: (playerId: string) => dispatch(draftPlayer(playerId))
+        draftPlayer: (playerId: string) => dispatch(draftPlayer(playerId)),
+        togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position))
     }
 }
 
 export default connect(
     mapStateToProps,
-    // { getGroupsAndTiers, getPlayers: getPlayersEffect }
     mapDispatchToProps
 )(Rankings);

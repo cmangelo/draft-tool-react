@@ -2,6 +2,50 @@
 
 .Rankings {
     display: flex;
+    flex-direction: column;
+
+    .GroupSelector {
+        display: flex;
+
+        input {
+            // position: absolute !important;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            width: 1px;
+            border: 0;
+            overflow: hidden;
+
+            &:checked+label {
+                background-color: $light-grey;
+            }
+        }
+
+        label {
+            // color: #010101;
+            font-size: 14px;
+            line-height: 1;
+            text-align: center;
+            padding: 11px;
+            border: 1px solid #d9d9d9;
+            border-right: none;
+            cursor: pointer;
+
+            &:first-of-type {
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+            }
+
+            &:last-of-type {
+                border-right: 1px solid #d9d9d9;
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+        }
+    }
+
+    .groups {
+        display: flex;
+    }
 
     .Group {
         max-height: 100vh;
@@ -58,7 +102,7 @@
 
             .player-rank {
                 color: $secondary-font-color;
-                flex-basis: 15%;
+                flex-basis: 10%;
                 font-size: .9em;
                 margin: auto 0;
                 padding-right: 20px;
