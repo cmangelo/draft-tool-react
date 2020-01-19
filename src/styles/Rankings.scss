@@ -7,38 +7,42 @@
     .GroupSelector {
         display: flex;
 
-        input {
-            // position: absolute !important;
-            clip: rect(0, 0, 0, 0);
-            height: 1px;
-            width: 1px;
-            border: 0;
-            overflow: hidden;
+        >div {
+            input {
+                display: none;
 
-            &:checked+label {
-                background-color: $light-grey;
+                &:checked+label {
+                    background-color: $light-grey;
+                }
             }
-        }
 
-        label {
-            // color: #010101;
-            font-size: 14px;
-            line-height: 1;
-            text-align: center;
-            padding: 11px;
-            border: 1px solid #d9d9d9;
-            border-right: none;
-            cursor: pointer;
+            label {
+                -webkit-appearance: none;
+                display: block;
+                font-size: 14px;
+                line-height: 1;
+                text-align: center;
+                padding: 11px;
+                border: 1px solid #d9d9d9;
+                border-right: none;
+                cursor: pointer;
+                width: 35px;
+
+            }
 
             &:first-of-type {
-                border-top-left-radius: 3px;
-                border-bottom-left-radius: 3px;
+                label {
+                    border-top-left-radius: 3px;
+                    border-bottom-left-radius: 3px;
+                }
             }
 
             &:last-of-type {
-                border-right: 1px solid #d9d9d9;
-                border-top-right-radius: 3px;
-                border-bottom-right-radius: 3px;
+                label {
+                    border-right: 1px solid #d9d9d9;
+                    border-top-right-radius: 3px;
+                    border-bottom-right-radius: 3px;
+                }
             }
         }
     }
