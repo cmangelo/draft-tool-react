@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { draftPlayer, togglePositionVisible } from '../actions/rankings';
+import { togglePositionVisible } from '../actions/rankings';
+import { draftPlayerEffect } from '../effects/draftPlayer';
 import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../effects/getPlayers';
 import { EPosition } from '../models/enums/player.enum';
@@ -57,7 +58,7 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         getGroupsAndTiers: () => dispatch(getGroupsAndTiers()),
         getPlayers: () => dispatch(getPlayersEffect()),
-        draftPlayer: (playerId: string) => dispatch(draftPlayer(playerId)),
+        draftPlayer: (playerId: string) => dispatch(draftPlayerEffect(playerId)),
         togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position))
     }
 }

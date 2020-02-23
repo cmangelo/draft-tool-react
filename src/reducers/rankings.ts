@@ -31,13 +31,26 @@ const initialState: State = {
 export default function (state = initialState, action: { type: string, payload: any }) {
     switch (action.type) {
         case rankingsActionTypes.TOGGLE_POSITION_VISIBLE:
-            return {
-                ...state,
-                visibleGroups: {
-                    ...state.visibleGroups,
-                    [action.payload.position]: !state.visibleGroups[action.payload.position]
+            const isSmallScreen = window.screen.width < 750;
+            return isSmallScreen ?
+                {
+                    ...state,
+                    visibleGroups: {
+                        [EPosition.QB]: false,
+                        [EPosition.RB]: false,
+                        [EPosition.WR]: false,
+                        [EPosition.TE]: false,
+                        [EPosition.FLEX]: false,
+                        [action.payload.position]: true
+                    }
+                } :
+                {
+                    ...state,
+                    visibleGroups: {
+                        ...state.visibleGroups,
+                        [action.payload.position]: !state.visibleGroups[action.payload.position]
+                    }
                 }
-            }
         default:
             return state;
     }
