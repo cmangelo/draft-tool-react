@@ -1,3 +1,8 @@
 export const draftActionTypes = {
-    // DRAFT_PLAYER: '[Draft] Draft Player'
+    LOAD_DRAFT: '[API] Load Draft'
 };
+
+export const loadDraft = (draft: any) => ({
+    type: draftActionTypes.LOAD_DRAFT,
+    payload: draft
+});

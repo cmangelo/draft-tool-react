@@ -1,6 +1,8 @@
+import { draftActionTypes } from '../actions/draft';
 import { entitiesActionTypes } from '../actions/entities';
 import { rankingsActionTypes } from '../actions/rankings';
 import { IGroup } from '../models/group.interface';
+import { IPick } from '../models/pick.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 
@@ -51,6 +53,16 @@ export default function (state = initialState, action: { type: string, payload: 
                         drafted: true
                     }
                 }
+            }
+        case draftActionTypes.LOAD_DRAFT:
+            const picks = action.payload.picks as Array<IPick>;
+            const newPlayers = { ...state.players };
+            picks.forEach(pick => {
+                newPlayers[pick.player].drafted = true;
+            });
+            return {
+                ...state,
+                players: newPlayers
             }
         default:
             return state;
