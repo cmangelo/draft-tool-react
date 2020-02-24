@@ -87,7 +87,6 @@ const assignPicksToTeams = (picks: Array<IPick>, numTeams: number, numPicks: num
         teams[i] = { picks: [...emptyPicksArray], position: i };
     }
     let currTeam = 1;
-    // let currRound = 1;
     picks.forEach(pick => {
         const currRound = Math.ceil(pick.overall / numTeams);
         teams[currTeam].picks[currRound] = pick;

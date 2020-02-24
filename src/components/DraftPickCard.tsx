@@ -12,7 +12,7 @@ export const DraftPickCard: React.FC<any> = (props: any) => {
             <div className="draft-pick-card">
                 <div className="top">
                     <span className="pos-team"></span>
-                    <span className="round-pick">{props.round}.{pick.overall}</span>
+                    <span className="round-pick">{props.round}.{props.roundPick}</span>
                 </div>
             </div>
         );
@@ -20,7 +20,7 @@ export const DraftPickCard: React.FC<any> = (props: any) => {
         <div className={`draft-pick-card ${EPosition[player.position as number]}`}>
             <div className="top">
                 <span className="pos-team">{EPosition[player.position]} - {player.team}</span>
-                <span className="round-pick">{props.round}.{pick.overall}</span>
+                <span className="round-pick">{props.round}.{props.roundPick}</span>
             </div>
             <div className="bottom">
                 <div className="name">

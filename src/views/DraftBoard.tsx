@@ -4,9 +4,8 @@ import { connect } from 'react-redux';
 import { DraftPickCard } from '../components/DraftPickCard';
 import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../effects/getPlayers';
-import { IDraft } from '../models/draft.interface';
 import { IPick } from '../models/pick.interface';
-import { getDraftConfig, getTeams } from '../reducers/draft';
+import { getTeams } from '../reducers/draft';
 
 class DraftBoard extends React.Component<any, any> {
     componentDidMount() {
@@ -15,22 +14,24 @@ class DraftBoard extends React.Component<any, any> {
     }
 
     renderRows() {
-        if (!this.props.teams || !this.props.draftConfig) return;
-        const config = this.props.draftConfig as IDraft;
+        if (!this.props.teams) return;
         return this.props.teams.map((team: any) => {
             return (
                 <div className="team-column" key={team.position}>
-                    {this.renderColumn(team)}
+                    {this.renderColumn(team, this.props.teams.length)}
                 </div>
             );
         });
     }
 
-    renderColumn(team: any) {
+    renderColumn(team: any, numTeams: number) {
         return team.picks.map((pick: IPick, ind: number) => {
-            if (ind === 0) return;
+            if (ind === 0) return (<div key={ind}></div>);
+            const roundPick = ind % 2 !== 0
+                ? team.position
+                : Math.abs(team.position - (numTeams + 1));
             return (
-                <DraftPickCard pick={pick} key={ind} round={ind}></DraftPickCard>
+                <DraftPickCard pick={pick} key={ind} round={ind} roundPick={roundPick}></DraftPickCard>
             );
         });
     }
@@ -45,8 +46,7 @@ class DraftBoard extends React.Component<any, any> {
 }
 
 const mapStateToProps = (state: any) => ({
-    teams: getTeams(state),
-    draftConfig: getDraftConfig(state)
+    teams: getTeams(state)
 });
 
 const mapDispatchToProps = (dispatch: any) => {
