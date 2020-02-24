@@ -13,6 +13,8 @@ const App: React.FC = () => {
       <Router>
         <div>
           <nav>
+            <Link to="/login">Login</Link>
+            &nbsp;
             <Link to="/rankings">Rankings</Link>
             &nbsp;
             <Link to="/board">Board</Link>
@@ -31,9 +33,6 @@ const App: React.FC = () => {
           </Switch>
         </div>
       </Router>
-      {/* <Login></Login> */}
-      {/* <Rankings></Rankings> */}
-      <DraftBoard></DraftBoard>
     </div>
   );
 }
