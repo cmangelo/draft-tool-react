@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EPosition } from '../models/enums/player.enum';
+import { EPosition } from '../models/enums/position.enum';
 import { IPlayer } from '../models/player.interface';
 
 export const PlayerRow: React.FC<{ player: IPlayer, rank: number, draftPlayer: Function }> = (props: { player: IPlayer, rank: number, draftPlayer: Function }) => {

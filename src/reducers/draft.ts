@@ -80,16 +80,16 @@ export default function (state = initialState, action: { type: string, payload: 
 const assignPicksToTeams = (picks: Array<IPick>, numTeams: number, numPicks: number) => {
     const teams = {} as any;
     const emptyPicksArray = [];
-    for (let i = 0; i < numPicks; i++) {
+    for (let i = 0; i < numPicks + 1; i++) {
         emptyPicksArray.push({ _id: '', draft: '', overall: 0, player: '' } as IPick)
     }
     for (let i = 1; i < numTeams + 1; i++) {
-
         teams[i] = { picks: [...emptyPicksArray], position: i };
     }
     let currTeam = 1;
-    let currRound = 1;
+    // let currRound = 1;
     picks.forEach(pick => {
+        const currRound = Math.ceil(pick.overall / numTeams);
         teams[currTeam].picks[currRound] = pick;
         currTeam = getNextTeam(currTeam, pick.overall, numTeams);
     });
@@ -109,3 +109,14 @@ const getNextTeam = (currTeam: number, overall: number, numTeams: number) => {
 }
 
 export const getDraft = (state: any) => state.draft;
+export const getDraftConfig = (state: any) => state.draft.draftConfig;
+export const getTeams = (state: any) => Object.keys(state.draft.teams)
+    .map(key => {
+        const team = state.draft.teams[key];
+        team.picks.map((pick: IPick) => {
+            pick.playerObject = state.entities.players[pick.player];
+            return pick;
+        });
+        return team;
+    })
+    .sort((a, b) => a.position - b.position);

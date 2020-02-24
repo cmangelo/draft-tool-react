@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { EPosition } from '../models/enums/player.enum';
+import { EPosition } from '../models/enums/position.enum';
 
 export const GroupSelector: React.FC<{ visibleGroups: { [key: number]: boolean }, togglePositionVisible: Function }> = (props: { visibleGroups: { [key: number]: boolean }, togglePositionVisible: Function }) => {
 

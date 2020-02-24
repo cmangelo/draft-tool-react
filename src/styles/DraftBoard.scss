@@ -1,0 +1,93 @@
+@import './Variables.scss';
+
+.DraftBoard {
+    display: flex;
+    flex-direction: row;
+
+    .team-column {
+        display: flex;
+        flex-direction: column;
+
+        .draft-pick-card {
+            margin: 3px;
+            background-color: #ececec;
+            border-radius: 4px;
+            height: 70px;
+            min-width: 100px;
+            color: white;
+            padding: 2px 5px;
+
+
+            .top {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 11px;
+
+                .round-pick {
+                    font-weight: bolder;
+                    color: #7d7d7d;
+                    opacity: .8;
+                }
+            }
+
+            .bottom {
+                display: flex;
+                justify-content: space-between;
+                align-items: baseline;
+                font-size: 13px;
+                margin-top: 5px;
+
+                .name {
+                    line-height: 1;
+                    width: 75px;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow-x: hidden;
+                    display: flex;
+                    flex-direction: column;
+
+                    .last-name {
+                        font-weight: 600;
+                        padding-bottom: 3px;
+                    }
+                }
+            }
+
+            &.QB {
+                background-color: #ff2b6d;
+            }
+
+            &.RB {
+                background-color: #00ceb8;
+            }
+
+            &.WR {
+                background-color: #58a7ff;
+            }
+
+            &.TE {
+                background-color: #ffae58;
+            }
+
+            &.DEF {
+                background-color: #022047;
+            }
+
+            &.K {
+                background-color: #bd66ff;
+            }
+
+            &.QB,
+            &.RB,
+            &.WR,
+            &.TE,
+            &.DEF,
+            &.K {
+                .round-pick {
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { EPosition } from '../models/enums/player.enum';
+import { EPosition } from '../models/enums/position.enum';
 
 export const rankingsActionTypes = {
     DRAFT_PLAYER: '[Rankings] Draft Player',

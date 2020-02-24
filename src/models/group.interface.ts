@@ -1,4 +1,4 @@
-import { EPosition } from './enums/player.enum';
+import { EPosition } from './enums/position.enum';
 import { ITier } from './tier.interface';
 
 export interface IGroup {

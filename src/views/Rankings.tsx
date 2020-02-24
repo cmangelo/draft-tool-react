@@ -5,7 +5,7 @@ import { togglePositionVisible } from '../actions/rankings';
 import { draftPlayerEffect } from '../effects/draftPlayer';
 import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../effects/getPlayers';
-import { EPosition } from '../models/enums/player.enum';
+import { EPosition } from '../models/enums/position.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';

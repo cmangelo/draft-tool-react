@@ -1,5 +1,5 @@
 import { rankingsActionTypes } from '../actions/rankings';
-import { EPosition } from '../models/enums/player.enum';
+import { EPosition } from '../models/enums/position.enum';
 
 interface State {
     visibleGroups: { [key: number]: boolean }
