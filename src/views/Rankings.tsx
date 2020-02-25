@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { togglePositionVisible } from '../actions/rankings';
+import { GroupSelector } from '../components/GroupSelector';
+import { PlayerGroup } from '../components/PlayerGroup';
 import { draftPlayerEffect } from '../effects/draftPlayer';
 import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../effects/getPlayers';
@@ -11,8 +13,6 @@ import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import { getVisibleGroups } from '../reducers/rankings';
 import { getGroupsWithPlayers } from '../selectors/rankings';
-import { GroupSelector } from './GroupSelector';
-import { PlayerGroup } from './PlayerGroup';
 
 
 interface RankingsState {
@@ -54,14 +54,12 @@ const mapStateToProps = (state: any) => ({
     visibleGroups: getVisibleGroups(state)
 });
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getGroupsAndTiers: () => dispatch(getGroupsAndTiers()),
-        getPlayers: () => dispatch(getPlayersEffect()),
-        draftPlayer: (playerId: string) => dispatch(draftPlayerEffect(playerId)),
-        togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position))
-    }
-}
+const mapDispatchToProps = (dispatch: any) => ({
+    getGroupsAndTiers: () => dispatch(getGroupsAndTiers()),
+    getPlayers: () => dispatch(getPlayersEffect()),
+    draftPlayer: (playerId: string) => dispatch(draftPlayerEffect(playerId)),
+    togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position))
+})
 
 export default connect(
     mapStateToProps,

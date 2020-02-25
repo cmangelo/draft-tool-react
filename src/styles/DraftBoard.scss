@@ -3,16 +3,30 @@
 .DraftBoard {
     display: flex;
     flex-direction: row;
+    overflow: auto;
+
+    @media only screen and (min-width: 1380px) {
+        justify-content: center;
+    }
 
     .team-column {
         display: flex;
         flex-direction: column;
 
+        &:first-of-type {
+            padding-left: 15px;
+        }
+
+        &:last-of-type {
+            padding-right: 15px;
+        }
+
         .draft-pick-card {
             margin: 3px;
             background-color: #ececec;
             border-radius: 4px;
-            height: 70px;
+            height: 60px;
+            width: 90px;
             color: white;
             padding: 2px 5px;
 

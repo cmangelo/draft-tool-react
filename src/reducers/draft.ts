@@ -10,6 +10,7 @@ export interface DraftState {
     teams: { [overall: number]: any }
     currTeam: number;
     currRound: number;
+    previousDrafts: Array<IDraft>;
 }
 
 const initialState: DraftState = {
@@ -18,7 +19,8 @@ const initialState: DraftState = {
     overall: 1,
     teams: {},
     currTeam: 1,
-    currRound: 1
+    currRound: 1,
+    previousDrafts: []
 }
 
 export default function (state = initialState, action: { type: string, payload: any }) {
@@ -47,7 +49,7 @@ export default function (state = initialState, action: { type: string, payload: 
             numTeams = draft.numTeams;
             const numPicks = draft.numRounds;
             const teams = assignPicksToTeams(action.payload.picks, numTeams, numPicks);
-            const overallPick = action.payload.picks.length + 1;
+            const overallPick: number = action.payload.picks.length + 1 || 1;
             const round = Math.ceil(overallPick / numTeams);
             const oddRound = round % 2 !== 0;
             let currTeam = 0;
@@ -119,3 +121,4 @@ export const getTeams = (state: any) => Object.keys(state.draft.teams)
         return team;
     })
     .sort((a, b) => a.position - b.position);
+export const getPreviousDrafts = (state: any) => state.draft.previousDrafts;

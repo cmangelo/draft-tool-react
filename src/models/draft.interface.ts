@@ -1,6 +1,6 @@
 export interface IDraft {
-    _id: string;
-    owner: string;
+    _id?: string;
+    owner?: string;
     numTeams: number;
     numRounds: number;
     userPosition: number;
@@ -12,6 +12,6 @@ export interface IDraft {
     BENCH: number;
     K: number;
     DEF: number;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }
