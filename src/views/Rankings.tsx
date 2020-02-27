@@ -24,8 +24,10 @@ interface RankingsState {
 class Rankings extends React.Component<any, RankingsState> {
 
     componentDidMount() {
-        this.props.getPlayers();
-        this.props.getGroupsAndTiers();
+        if (!this.props.groupsWithPlayers || (this.props.groupsWithPlayers && !this.props.groupsWithPlayers.length)) {
+            this.props.getPlayers();
+            this.props.getGroupsAndTiers();
+        }
     }
 
     createGroups() {
