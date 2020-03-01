@@ -3,7 +3,7 @@ import superagent from 'superagent';
 
 import { loadGroups, loadPlayersPending, loadTiers } from '../actions/entities';
 
-export const getGroupsAndTiers = () => {
+export const getGroupsAndTiersEffect = () => {
     return async (dispatch: any) => {
         dispatch(loadPlayersPending());
         const response = await superagent

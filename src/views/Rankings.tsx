@@ -5,8 +5,6 @@ import { togglePositionVisible } from '../actions/rankings';
 import { GroupSelector } from '../components/GroupSelector';
 import { PlayerGroup } from '../components/PlayerGroup';
 import { draftPlayerEffect } from '../effects/draftPlayer';
-import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
-import { getPlayersEffect } from '../effects/getPlayers';
 import { EPosition } from '../models/enums/position.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
@@ -23,14 +21,7 @@ interface RankingsState {
 
 class Rankings extends React.Component<any, RankingsState> {
 
-    componentDidMount() {
-        if (!this.props.groupsWithPlayers || (this.props.groupsWithPlayers && !this.props.groupsWithPlayers.length)) {
-            this.props.getPlayers();
-            this.props.getGroupsAndTiers();
-        }
-    }
-
-    createGroups() {
+    renderGroups() {
         if (!this.props.groupsWithPlayers) return;
         return this.props.groupsWithPlayers.map((group: IGroup) => {
             return (
@@ -44,7 +35,7 @@ class Rankings extends React.Component<any, RankingsState> {
             <div className="Rankings">
                 <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
                 <div className="groups">
-                    {this.createGroups()}
+                    {this.renderGroups()}
                 </div>
             </div>
         );
@@ -57,11 +48,9 @@ const mapStateToProps = (state: any) => ({
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-    getGroupsAndTiers: () => dispatch(getGroupsAndTiers()),
-    getPlayers: () => dispatch(getPlayersEffect()),
     draftPlayer: (playerId: string) => dispatch(draftPlayerEffect(playerId)),
-    togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position))
-})
+    togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position)),
+});
 
 export default connect(
     mapStateToProps,

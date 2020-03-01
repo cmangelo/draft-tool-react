@@ -14,7 +14,7 @@ export interface DraftState {
 }
 
 const initialState: DraftState = {
-    draftId: '5deda7de6a951c87448a52fb',
+    draftId: '',
     draftConfig: null,
     overall: 1,
     teams: {},
@@ -73,6 +73,16 @@ export default function (state = initialState, action: { type: string, payload: 
                 currRound: round,
                 currTeam,
                 teams
+            }
+        case draftActionTypes.LOAD_DRAFTS:
+            return {
+                ...state,
+                previousDrafts: action.payload
+            }
+        case draftActionTypes.SET_DRAFT_ID:
+            return {
+                ...state,
+                draftId: action.payload
             }
         default:
             return state;

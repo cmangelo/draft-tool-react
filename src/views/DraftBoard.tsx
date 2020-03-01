@@ -2,18 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { DraftPickCard } from '../components/DraftPickCard';
-import { getGroupsAndTiers } from '../effects/getGroupsAndTiers';
-import { getPlayersEffect } from '../effects/getPlayers';
 import { IPick } from '../models/pick.interface';
 import { getTeams } from '../reducers/draft';
 
 class DraftBoard extends React.Component<any, any> {
-    componentDidMount() {
-        this.props.getPlayers();
-        this.props.getGroupsAndTiers();
-    }
 
-    renderRows() {
+    renderGrid() {
         if (!this.props.teams) return;
         return this.props.teams.map((team: any) => {
             return (
@@ -39,7 +33,7 @@ class DraftBoard extends React.Component<any, any> {
     render() {
         return (
             <div className="DraftBoard">
-                {this.renderRows()}
+                {this.renderGrid()}
             </div>
         )
     }
@@ -49,15 +43,6 @@ const mapStateToProps = (state: any) => ({
     teams: getTeams(state)
 });
 
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getGroupsAndTiers: () => dispatch(getGroupsAndTiers()),
-        getPlayers: () => dispatch(getPlayersEffect()),
-    }
-}
-
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(DraftBoard);
