@@ -1,8 +1,8 @@
-import { normalize, schema } from 'normalizr';
-import superagent from 'superagent';
+import { normalize, schema } from "normalizr";
+import superagent from "superagent";
 
-import { loadPlayers } from '../actions/entities';
-import { getDraftEffect } from './getDraft';
+import { loadPlayers } from "../actions/entities";
+import { getDraftEffect } from "./getDraft";
 
 export const getPlayersEffect = () => {
     return async (dispatch: any) => {
@@ -13,7 +13,7 @@ export const getPlayersEffect = () => {
         let playersJSON = response.body;
         const playerSchema = new schema.Entity('players', {}, { idAttribute: '_id' });
         const players = normalize(playersJSON, [playerSchema]);
-        dispatch(loadPlayers(players.entities.players));
+        dispatch(loadPlayers(players.entities.players as any));
         dispatch(getDraftEffect()); // need to get the draft after we get the players so we can mark players as drafted
     }
 }

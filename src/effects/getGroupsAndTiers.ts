@@ -1,7 +1,7 @@
-import { normalize, schema } from 'normalizr';
-import superagent from 'superagent';
+import { normalize, schema } from "normalizr";
+import superagent from "superagent";
 
-import { loadGroups, loadPlayersPending, loadTiers } from '../actions/entities';
+import { loadGroups, loadPlayersPending, loadTiers } from "../actions/entities";
 
 export const getGroupsAndTiersEffect = () => {
     return async (dispatch: any) => {
@@ -15,7 +15,7 @@ export const getGroupsAndTiersEffect = () => {
         const tierSchema = new schema.Entity('tiers', {}, { idAttribute: '_id' });
         const groups = normalize(groupsJSON.groups, [groupSchema]);
         const tiers = normalize(groupsJSON.tiers, [tierSchema]);
-        dispatch(loadGroups(groups.entities.groups));
-        dispatch(loadTiers(tiers.entities.tiers));
+        dispatch(loadGroups(groups.entities.groups as any));
+        dispatch(loadTiers(tiers.entities.tiers as any));
     }
 }
