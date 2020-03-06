@@ -14,6 +14,6 @@ export const getPlayersEffect = () => {
         const playerSchema = new schema.Entity('players', {}, { idAttribute: '_id' });
         const players = normalize(playersJSON, [playerSchema]);
         dispatch(loadPlayers(players.entities.players as any));
-        dispatch(getDraftEffect()); // need to get the draft after we get the players so we can mark players as drafted
+        dispatch(getDraftEffect());
     }
 }
