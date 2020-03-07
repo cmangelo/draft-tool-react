@@ -17,8 +17,7 @@ class CreateDraft extends React.Component<any, any> {
                 BENCH: { value: 6, name: 'Bench' },
                 DEF: { value: 1, name: 'DST' },
                 K: { value: 1, name: 'K' },
-                numTeams: { value: 12, name: 'Teams' },
-                // userPosition: { value: 1, name: 'Position' }
+                numTeams: { value: 12, name: 'Teams' }
             }
         };
     }
