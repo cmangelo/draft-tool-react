@@ -18,6 +18,10 @@
         padding: 10px;
         font-size: 1.1em;
         background-color: $secondary-color;
+
+        &:hover {
+            background-color: $dark-button-hover;
+        }
     }
 
     .list {

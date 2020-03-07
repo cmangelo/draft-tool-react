@@ -3,8 +3,9 @@ import './App.scss';
 import React from 'react';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
 
+import CreateDraft from './views/CreateDraft';
 import DraftArena from './views/DraftArena';
-import DraftsLists from './views/DraftsLists';
+import DraftsLists from './views/DraftsList';
 import { Login } from './views/Login';
 
 const App: React.FC = () => {
@@ -17,10 +18,12 @@ const App: React.FC = () => {
               <Link to="/login">Login</Link>
               &nbsp;
               <Link to="/drafts">Drafts</Link>
+              &nbsp;
             </nav>
 
             <Switch>
               <Route path="/login" component={Login} />
+              <Route path="/drafts/create" component={CreateDraft} />
               <Route path="/drafts/:draftId" component={DraftArena} />
               <Route path="/drafts" component={DraftsLists} />
             </Switch>

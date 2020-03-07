@@ -2,7 +2,6 @@ import moment from 'moment';
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { createDraftEffect } from '../effects/createDrafts';
 import { getPreviousDraftsEffect } from '../effects/getPreviousDrafts';
 import { IDraft } from '../models/draft.interface';
 import { getPreviousDrafts } from '../reducers/draft';
@@ -13,7 +12,7 @@ class DraftsList extends React.Component<any, any> {
     }
 
     createDraft() {
-        this.props.createDraft();
+        this.props.history.push('/drafts/create');
     }
 
     goToDraft(draftId: string) {
@@ -38,12 +37,12 @@ class DraftsList extends React.Component<any, any> {
             );
         });
     }
-    render() {
 
+    render() {
         return (
             <div className="DraftsList">
                 <h1>My Drafts</h1>
-                <button onClick={this.props.createDraft}>New Draft</button>
+                <button onClick={(this.createDraft.bind(this))}>New Draft</button>
                 <div className="list">
                     {this.renderDraftsList()}
                 </div>
@@ -58,7 +57,6 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     getPreviousDrafts: () => dispatch(getPreviousDraftsEffect()),
-    createDraft: () => dispatch(createDraftEffect())
 });
 
 export default connect(
