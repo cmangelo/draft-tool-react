@@ -3,10 +3,13 @@ import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
+const localDev = true;
+const endpoint = localDev ? 'http://localhost:3000/' : 'http://138.197.197.35/';
+
 export default createStore(
     rootReducer,
     compose(
-        applyMiddleware(thunk),
+        applyMiddleware(thunk.withExtraArgument(endpoint)),
         (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
     )
 );

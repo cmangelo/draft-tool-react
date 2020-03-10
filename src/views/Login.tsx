@@ -13,7 +13,7 @@ const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
         body: JSON.stringify({ username, password })
     });
     const json = await response.json();
-    console.log(json);
+    localStorage.setItem('token', json.token)
 }
 
 export const Login: React.FC = () => {

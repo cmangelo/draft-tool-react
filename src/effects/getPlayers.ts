@@ -1,15 +1,16 @@
-import { normalize, schema } from "normalizr";
-import superagent from "superagent";
+import { normalize, schema } from 'normalizr';
+import superagent from 'superagent';
 
-import { loadPlayers } from "../actions/entities";
-import { getDraftEffect } from "./getDraft";
+import { loadPlayers } from '../actions/entities';
+import { getDraftEffect } from './getDraft';
 
 export const getPlayersEffect = () => {
-    return async (dispatch: any) => {
+    const token = localStorage.getItem('token');
+    return async (dispatch: any, _: any, endpoint: string) => {
         let response = await superagent
-            .get('http://localhost:3000/players')
+            .get(endpoint + 'players')
             .set('Content-Type', 'application/json')
-            .set('Authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZGU4ODVmMmQ3NDk3ZDRlNGM3NDY3MWUiLCJpYXQiOjE1NzU4NjA3NDJ9.4f8qdnYxko3cXthkzrOVBH4p7UYp3XyS9nmTyq4lM9M');
+            .set('Authorization', 'Bearer ' + token);
         let playersJSON = response.body;
         const playerSchema = new schema.Entity('players', {}, { idAttribute: '_id' });
         const players = normalize(playersJSON, [playerSchema]);
