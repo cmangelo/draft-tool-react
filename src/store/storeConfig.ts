@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
-const localDev = true;
+const localDev = false;
 const endpoint = localDev ? 'http://localhost:3000/' : 'http://138.197.197.35/';
 
 export default createStore(
