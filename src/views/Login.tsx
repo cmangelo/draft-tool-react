@@ -1,11 +1,13 @@
 import React, { FormEvent } from 'react';
 
+import { endpoint } from '../store/storeConfig';
+
 const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.target as any;
     const username = target.elements.username.value.trim();
     const password = target.elements.password.value.trim();
-    const response = await fetch('http://localhost:3000/users/login', {
+    const response = await fetch(endpoint + 'users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
