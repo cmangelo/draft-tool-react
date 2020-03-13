@@ -7,6 +7,7 @@ import CreateDraft from './views/CreateDraft';
 import DraftArena from './views/DraftArena';
 import DraftsLists from './views/DraftsList';
 import { Login } from './views/Login';
+import { FileUpload } from './views/FileUpload';
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const App: React.FC = () => {
               <Link to="/drafts">Drafts</Link>
               &nbsp;
             </nav>
-
+            <FileUpload />
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/drafts/create" component={CreateDraft} />
