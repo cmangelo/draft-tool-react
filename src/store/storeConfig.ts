@@ -1,4 +1,5 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
@@ -8,8 +9,8 @@ export const endpoint = localDev ? 'http://localhost:3000/' : 'http://157.245.23
 
 export default createStore(
     rootReducer,
-    compose(
+    composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(endpoint)),
-        (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+        // (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
