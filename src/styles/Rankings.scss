@@ -58,6 +58,7 @@
         overflow: auto;
         padding: 0 10px;
         width: 100%;
+        -webkit-overflow-scrolling: touch;
 
         .tier-header {
             background: white;
@@ -148,6 +149,7 @@
                 font-size: 14px;
                 height: fit-content;
                 margin: auto 0;
+                padding: 9px 13px;
             }
 
             &.drafted {
