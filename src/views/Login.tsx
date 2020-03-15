@@ -20,7 +20,9 @@ export const Login: React.FC = (props: any) => {
     }
 
     return (
-        <div>
+        <div className="Login">
+            <img src={process.env.PUBLIC_URL + 'img/default-monochrome.svg'} alt="" />
+
             <form action="" onSubmit={onFormSubmit}>
                 <input type="text" placeholder="Username" name="username" />
                 <input type="password" placeholder="Password" name="password" />

@@ -1,0 +1,35 @@
+.Login {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    img {
+        max-height: 200px;
+        margin-top: 120px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        margin: auto;
+
+        input {
+            margin: 10px 0;
+            -webkit-appearance: none;
+            font-size: 20px;
+            padding: 9px;
+            border: 1px solid #d2d2d2;
+            border-radius: 11px;
+            min-width: 270px;
+        }
+
+        button {
+            font-size: 20px;
+            background-color: #c7c7c7; //#51a3ff;
+            color: white;
+            margin-top: 5px;
+        }
+    }
+
+}
