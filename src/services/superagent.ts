@@ -1,6 +1,6 @@
 import superagent from 'superagent';
 
-const localDev = true;
+const localDev = false;
 const API_ROOT = localDev ? 'http://localhost:3000/' : 'http://157.245.231.113/api/';
 
 export const get = async (endpoint: string): Promise<any> => {
