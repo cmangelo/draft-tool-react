@@ -2,9 +2,8 @@ import React, { FormEvent, useState } from 'react';
 
 import { post } from '../services/superagent';
 
-
 export const Login: React.FC = (props: any) => {
-    const [message, setMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -15,20 +14,24 @@ export const Login: React.FC = (props: any) => {
             const json = response.body;
             localStorage.setItem('token', json.token)
             props.history.push('/drafts');
-            setMessage(json.token);
+        }, error => {
+            if (error.status === 400) {
+                setErrorMessage('Invalid username or password');
+            } else {
+                setErrorMessage('Something went wrong. Please try again');
+            }
         });
     }
 
     return (
         <div className="Login">
             <img src={process.env.PUBLIC_URL + 'img/default-monochrome.svg'} alt="" />
-
             <form action="" onSubmit={onFormSubmit}>
                 <input type="text" placeholder="Username" name="username" />
                 <input type="password" placeholder="Password" name="password" />
-                <button type="submit">Submit</button>
+                <div className="error-message">{errorMessage}</div>
+                <button type="submit">Log In</button>
             </form>
-            {message}
         </div>
     );
 }

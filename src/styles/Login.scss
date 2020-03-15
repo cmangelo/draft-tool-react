@@ -1,35 +1,51 @@
+@import './Variables.scss';
+
 .Login {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 80vh;
 
     img {
         max-height: 200px;
-        margin-top: 120px;
     }
 
     form {
         display: flex;
         flex-direction: column;
-        padding: 20px;
-        margin: auto;
+        padding: 20px 20px 10px 20px;
+        margin: 0 auto;
 
         input {
-            margin: 10px 0;
+            margin-top: 10px;
             -webkit-appearance: none;
-            font-size: 20px;
-            padding: 9px;
-            border: 1px solid #d2d2d2;
-            border-radius: 11px;
+            font-size: 16px;
+            padding: 8px;
+            border: $darker-border;
+            border-radius: 5px;
             min-width: 270px;
+
+            &:-webkit-autofill::first-line {
+                font-size: 16px
+            }
         }
 
         button {
-            font-size: 20px;
-            background-color: #c7c7c7; //#51a3ff;
+            font-size: 16px;
+            background-color: #41ccb8;
             color: white;
             margin-top: 5px;
+            border-radius: 30px;
+
+            &:hover {
+                background-color: #28a895;
+            }
         }
     }
 
+    .error-message {
+        color: red;
+        font-size: 12px;
+        height: 16px;
+    }
 }
