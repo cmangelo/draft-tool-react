@@ -1,9 +1,12 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 import { post } from '../services/superagent';
 
 
 export const Login: React.FC = (props: any) => {
+    // let message = '';
+    const [message, setMessage] = useState('');
+
     const onFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const target = event.target as any;
@@ -12,7 +15,9 @@ export const Login: React.FC = (props: any) => {
         post('users/login', { username, password }).then((response: any) => {
             const json = response.body;
             localStorage.setItem('token', json.token)
-            props.history.push('/drafts');
+            // props.history.push('/drafts');
+            setMessage(json.token);
+            console.log(message)
         });
     }
 
@@ -23,6 +28,7 @@ export const Login: React.FC = (props: any) => {
                 <input type="password" placeholder="Password" name="password" />
                 <button type="submit">Submit</button>
             </form>
+            {message}
         </div>
     );
 }
