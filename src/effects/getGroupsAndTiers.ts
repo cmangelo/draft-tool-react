@@ -1,22 +1,24 @@
+import { push } from 'connected-react-router';
 import { normalize, schema } from 'normalizr';
-import superagent from 'superagent';
 
-import { loadGroups, loadPlayersPending, loadTiers } from '../actions/entities';
+import { loadGroups, loadTiers } from '../actions/entities';
+import { get } from '../services/superagent';
 
 export const getGroupsAndTiersEffect = () => {
-    const token = localStorage.getItem('token');
-    return async (dispatch: any, _: any, endpoint: string) => {
-        dispatch(loadPlayersPending());
-        const response = await superagent
-            .get(endpoint + 'players/groups')
-            .set('Content-Type', 'application/json')
-            .set('Authorization', 'Bearer ' + token)
-        const groupsJSON = response.body;
-        const groupSchema = new schema.Entity('groups', {}, { idAttribute: '_id' });
-        const tierSchema = new schema.Entity('tiers', {}, { idAttribute: '_id' });
-        const groups = normalize(groupsJSON.groups, [groupSchema]);
-        const tiers = normalize(groupsJSON.tiers, [tierSchema]);
-        dispatch(loadGroups(groups.entities.groups as any));
-        dispatch(loadTiers(tiers.entities.tiers as any));
+    return async (dispatch: any) => {
+        try {
+            const response = await get('players/groups');
+            const groupsJSON = response.body;
+            const groupSchema = new schema.Entity('groups', {}, { idAttribute: '_id' });
+            const tierSchema = new schema.Entity('tiers', {}, { idAttribute: '_id' });
+            const groups = normalize(groupsJSON.groups, [groupSchema]);
+            const tiers = normalize(groupsJSON.tiers, [tierSchema]);
+            dispatch(loadGroups(groups.entities.groups as any));
+            dispatch(loadTiers(tiers.entities.tiers as any));
+        } catch (err) {
+            if (err.status === 401)
+                dispatch(push('/login'));
+        }
+
     }
 }

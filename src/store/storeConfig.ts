@@ -1,16 +1,21 @@
+import { routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
-const localDev = false;
-export const endpoint = localDev ? 'http://localhost:3000/' : 'http://157.245.231.113/api/';
+export const endpoint = true ? 'http://localhost:3000/' : 'http://157.245.231.113/api/';
 
+
+export const history = createBrowserHistory();
 export default createStore(
-    rootReducer,
+    rootReducer(history),
     composeWithDevTools(
-        applyMiddleware(thunk.withExtraArgument(endpoint)),
-        // (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+        applyMiddleware(
+            thunk,
+            routerMiddleware(history)
+        ),
     )
 );

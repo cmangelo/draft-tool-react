@@ -1,35 +1,46 @@
 import './App.scss';
 
+import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
+import { history } from './store/storeConfig';
 import CreateDraft from './views/CreateDraft';
 import DraftArena from './views/DraftArena';
 import DraftsLists from './views/DraftsList';
-import { Login } from './views/Login';
 import { FileUpload } from './views/FileUpload';
+import { Login } from './views/Login';
 
 const App: React.FC = () => {
+  const loggedIn = !!localStorage.getItem('token');
+
   return (
     <div className="App container">
       <div className="content">
-        <Router>
+        <ConnectedRouter history={history}>
           <div>
             <nav>
-              <Link to="/login">Login</Link>
-              &nbsp;
-              <Link to="/drafts">Drafts</Link>
-              &nbsp;
+              {
+                loggedIn ? (
+                  <div>
+                    <Link to="/drafts">Drafts</Link>
+                    &nbsp;
+                    <Link to="/fileUpload">Upload</Link>
+                  </div>
+                ) : (
+                    <Link to="/login">Login</Link>
+                  )
+              }
             </nav>
-            <FileUpload />
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/drafts/create" component={CreateDraft} />
               <Route path="/drafts/:draftId" component={DraftArena} />
               <Route path="/drafts" component={DraftsLists} />
+              <Route path="/fileUpload" component={FileUpload} />
             </Switch>
           </div>
-        </Router>
+        </ConnectedRouter>
       </div>
     </div>
   );

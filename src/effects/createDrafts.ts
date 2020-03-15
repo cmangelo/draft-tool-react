@@ -1,20 +1,20 @@
-import superagent from 'superagent';
+import { push } from 'connected-react-router';
 
 import { loadDraft } from '../actions/draft';
 import { IDraft } from '../models/draft.interface';
+import { post } from '../services/superagent';
 
 
 export const createDraftEffect = (draft: IDraft) => {
-    const token = localStorage.getItem('token');
     return async (dispatch: any, _: any, endpoint: string) => {
-        const response = await superagent
-            .post(endpoint + 'drafts')
-            .send(draft)
-            .set('Content-Type', 'application/json')
-            .set('Authorization', 'Bearer ' + token);
-
-        const draftJSON = response.body;
-        dispatch(loadDraft({ draft: draftJSON, picks: [] }))
-        return draftJSON._id;
+        try {
+            const response = await post('drafts', draft);
+            const draftJSON = response.body;
+            dispatch(loadDraft({ draft: draftJSON, picks: [] }))
+            return draftJSON._id;
+        } catch (err) {
+            if (err.status === 401)
+                dispatch(push('/login'));
+        }
     }
 }
