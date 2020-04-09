@@ -11,6 +11,7 @@ import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import { getVisibleGroups } from '../reducers/rankings';
 import { getGroupsWithPlayers } from '../selectors/rankings';
+import { screenSizes } from '../services/window';
 
 
 interface RankingsState {
@@ -33,7 +34,10 @@ class Rankings extends React.Component<any, RankingsState> {
     render() {
         return (
             <div className="Rankings">
-                <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
+                {
+                    window.innerWidth < screenSizes.XL &&
+                    <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
+                }
                 <div className="groups">
                     {this.renderGroups()}
                 </div>

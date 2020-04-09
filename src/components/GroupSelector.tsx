@@ -5,7 +5,8 @@ import { EPosition } from '../models/enums/position.enum';
 export const GroupSelector: React.FC<{ visibleGroups: { [key: number]: boolean }, togglePositionVisible: Function }> = (props: { visibleGroups: { [key: number]: boolean }, togglePositionVisible: Function }) => {
 
     const handleCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
-        props.togglePositionVisible(e.target.value);
+        if (e.target.value)
+            props.togglePositionVisible(e.target.value);
     }
 
     return (
@@ -15,7 +16,7 @@ export const GroupSelector: React.FC<{ visibleGroups: { [key: number]: boolean }
                 const inputId = "i" + group;
                 return (
                     <div key={key}>
-                        <input type={window.screen.width > 750 ? "checkbox" : "radio"}
+                        <input type="radio"
                             id={inputId}
                             value={group}
                             onChange={handleCheckbox}
