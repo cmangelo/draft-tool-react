@@ -3,6 +3,22 @@
 @import "./styles/DraftsList.scss";
 @import "./styles/CreateDraft.scss";
 @import "./styles/FileUpload.scss";
-@import "./styles//Login.scss";
+@import "./styles/Login.scss";
+@import "./styles/Sidebar.scss";
 @import "./styles/Variables.scss";
 @import "./styles/Base.scss";
+
+.App {
+
+    display: flex;
+
+    // >span {
+    //     z-index: 10;
+    //     position: fixed;
+    //     top: 0;
+    //     left: 0;
+    // }
+    .content {
+        flex-grow: 1;
+    }
+}

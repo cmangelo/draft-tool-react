@@ -54,11 +54,16 @@
     }
 
     .Group {
+        border-left: $default-border;
         max-height: 100vh;
         overflow: auto;
         padding: 0 10px;
         width: 100%;
         -webkit-overflow-scrolling: touch;
+
+        &:first-of-type {
+            border-left: none;
+        }
 
         .tier-header {
             background: white;

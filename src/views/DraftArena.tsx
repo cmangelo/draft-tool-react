@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { setDraftId } from '../actions/draft';
 import { getGroupsAndTiersEffect } from '../effects/getGroupsAndTiers';
@@ -8,9 +8,7 @@ import { getPlayersEffect } from '../effects/getPlayers';
 import DraftBoard from './DraftBoard';
 import Rankings from './Rankings';
 
-
 class DraftArena extends React.Component<any, any> {
-
     componentDidMount() {
         const draftId = this.props.match.params.draftId;
         this.props.setDraftId(draftId);
@@ -19,16 +17,9 @@ class DraftArena extends React.Component<any, any> {
     }
 
     render() {
-        const draftId = this.props.match.params.draftId;
         return (
             <Router>
                 <div>
-                    <nav>
-                        <Link to={`/drafts/${draftId}/rankings`}>Rankings</Link>
-                        &nbsp;
-                        <Link to={`/drafts/${draftId}/board`}>Board</Link>
-                    </nav>
-
                     <Switch>
                         <Route path="/drafts/:draftId/rankings" >
                             <Rankings />
