@@ -1,8 +1,11 @@
 .Sidebar {
-    // background-color: $light-grey;
     border-right: $default-border;
     height: 100vh;
-    width: 70px;
+    width: $sidebar-width;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 5;
 
     nav {
         display: flex;
@@ -28,6 +31,38 @@
 
             &:hover {
                 transform: translateY(-3px);
+            }
+
+            &.active {
+                color: $accent-color;
+            }
+        }
+    }
+
+    @include for-tablet-portrait-down {
+        border-right: none;
+        border-top: $default-border;
+        bottom: 0;
+        height: 50px;
+        width: 100vw;
+        top: initial;
+        background: white;
+
+        nav {
+            flex-direction: row;
+            justify-content: space-between;
+
+            a {
+                margin: 0 30px;
+
+                div {
+                    font-size: 12px;
+                    line-height: 1;
+                }
+
+                .icon {
+                    font-size: 20px;
+                }
             }
         }
     }

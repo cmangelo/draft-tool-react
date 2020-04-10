@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { EPosition } from '../models/enums/position.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
@@ -17,7 +18,13 @@ export const PlayerGroup: React.FC<{ group: IGroup, draftPlayer: Function }> = (
             return (
                 <div key={tier._id}>
                     <div className={"tier-header " + (allPlayersInTierDrafted(tier))}>
-                        <div className="tier-number">Tier {tier.tierNumber}</div>
+                        <div className="tier-number">
+                            {
+                                props.group.position === EPosition.FLEX ?
+                                    <span>FLEX</span> :
+                                    <span>{EPosition[props.group.position]} - Tier {tier.tierNumber}</span>
+                            }
+                        </div>
                         <hr />
                     </div>
                     {listPlayers(tier)}

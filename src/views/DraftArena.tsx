@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { setDraftId } from '../actions/draft';
 import { getGroupsAndTiersEffect } from '../effects/getGroupsAndTiers';
@@ -18,18 +18,16 @@ class DraftArena extends React.Component<any, any> {
 
     render() {
         return (
-            <Router>
-                <div>
-                    <Switch>
-                        <Route path="/drafts/:draftId/rankings" >
-                            <Rankings />
-                        </Route>
-                        <Route path="/drafts/:draftId/board">
-                            <DraftBoard />
-                        </Route>
-                    </Switch>
-                </div>
-            </Router>
+            <div>
+                <Switch>
+                    <Route path="/drafts/:draftId/rankings" >
+                        <Rankings />
+                    </Route>
+                    <Route path="/drafts/:draftId/board">
+                        <DraftBoard />
+                    </Route>
+                </Switch>
+            </div>
         )
     }
 }

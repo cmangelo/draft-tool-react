@@ -1,3 +1,6 @@
+@import "./styles/Variables.scss";
+@import "./styles/Base.scss";
+@import "./styles/Mixins.scss";
 @import "./styles/Rankings.scss";
 @import "./styles/DraftBoard.scss";
 @import "./styles/DraftsList.scss";
@@ -5,20 +8,14 @@
 @import "./styles/FileUpload.scss";
 @import "./styles/Login.scss";
 @import "./styles/Sidebar.scss";
-@import "./styles/Variables.scss";
-@import "./styles/Base.scss";
 
 .App {
-
     display: flex;
+    height: 100vh;
 
-    // >span {
-    //     z-index: 10;
-    //     position: fixed;
-    //     top: 0;
-    //     left: 0;
-    // }
     .content {
         flex-grow: 1;
+        // overflow: auto;
+        // padding-bottom: calc(#{$bottom-bar-height} + 10px);
     }
 }
