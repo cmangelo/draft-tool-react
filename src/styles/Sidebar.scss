@@ -2,23 +2,19 @@
     border-right: $default-border;
     height: 100vh;
     width: $sidebar-width;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 5;
 
     nav {
+        align-items: center;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
         height: 100%;
 
         a {
-            margin-bottom: 30px;
-            text-decoration: none;
-            text-align: center;
             color: $secondary-font-color;
+            margin-bottom: 30px;
+            text-align: center;
+            text-decoration: none;
             transition: transform ease .1s;
 
             div {
@@ -40,13 +36,14 @@
     }
 
     @include for-tablet-portrait-down {
+        background: white;
         border-right: none;
         border-top: $default-border;
         bottom: 0;
         height: 50px;
-        width: 100vw;
+        order: 1;
         top: initial;
-        background: white;
+        width: 100vw;
 
         nav {
             flex-direction: row;

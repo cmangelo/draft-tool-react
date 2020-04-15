@@ -51,18 +51,27 @@
 
     .groups {
         display: flex;
+        margin: 3px 0;
     }
 
     .Group {
         border-left: $default-border;
-        max-height: calc(100vh - #{$bottom-bar-height} - 58px);
+        max-height: calc(100vh - 6px);
         overflow: auto;
         padding: 0 10px;
         width: 100%;
         -webkit-overflow-scrolling: touch;
 
+        @include for-tablet-portrait-down {
+            max-height: calc(100vh - #{$bottom-bar-height} - 58px);
+        }
+
         &:first-of-type {
             border-left: none;
+        }
+
+        >div:last-of-type {
+            padding-bottom: 5px;
         }
 
         .tier-header {

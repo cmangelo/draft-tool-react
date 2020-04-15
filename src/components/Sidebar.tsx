@@ -11,7 +11,7 @@ export const Sidebar: React.FC<{ isLoggedIn: boolean }> = (props: { isLoggedIn: 
     const locationSegments = location.pathname.split('/');
 
     const inDraft = () => {
-        return locationSegments[1] === 'drafts' && locationSegments.length > 2;
+        return locationSegments[1] === 'drafts' && locationSegments.length > 2 && locationSegments[2] !== 'create';
     }
 
     const isActiveLink = (link: string) => {
@@ -45,6 +45,10 @@ export const Sidebar: React.FC<{ isLoggedIn: boolean }> = (props: { isLoggedIn: 
                         <Link to="/drafts" className={isActiveLink('drafts') ? 'active' : ''}>
                             <FontAwesomeIcon icon="list" className="icon" />
                             <div>Drafts</div>
+                        </Link>
+                        <Link to="/drafts/create" className={isActiveLink('create') ? 'active' : ''}>
+                            <FontAwesomeIcon icon={["far", "plus-square"]} className="far icon" />
+                            <div>New Draft</div>
                         </Link>
                         <Link to="/fileUpload" className={isActiveLink('fileUpload') ? 'active' : ''}>
                             <FontAwesomeIcon icon="file-upload" className="icon" />

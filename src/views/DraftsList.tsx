@@ -41,10 +41,11 @@ class DraftsList extends React.Component<any, any> {
     render() {
         return (
             <div className="DraftsList">
-                <h1>My Drafts</h1>
-                <button onClick={(this.createDraft.bind(this))}>New Draft</button>
-                <div className="list">
-                    {this.renderDraftsList()}
+                <div>
+                    <h1>My Drafts</h1>
+                    <div className="list">
+                        {this.renderDraftsList()}
+                    </div>
                 </div>
             </div>
         );

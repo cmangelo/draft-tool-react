@@ -1,6 +1,7 @@
 import './App.scss';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import { faBars, faDoorOpen, faFileUpload, faList, faListOl, faSignInAlt, faTh } from '@fortawesome/free-solid-svg-icons';
 import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
@@ -14,7 +15,7 @@ import DraftsLists from './views/DraftsList';
 import { FileUpload } from './views/FileUpload';
 import { Login } from './views/Login';
 
-library.add(faBars, faList, faFileUpload, faSignInAlt, faListOl, faTh, faDoorOpen);
+library.add(faBars, faList, faFileUpload, faSignInAlt, faListOl, faTh, faDoorOpen, faPlusSquare);
 
 const routes = [
 	{
@@ -63,10 +64,3 @@ const App: React.FC = () => {
 }
 
 export default App;
-
-
-/* <Route path="/login" component={Login} />
-<Route path="/drafts/create" component={CreateDraft} />
-<Route path="/drafts/:draftId" component={DraftArena} />
-<Route path="/drafts" component={DraftsLists} />
-<Route path="/fileUpload" component={FileUpload} /> */
