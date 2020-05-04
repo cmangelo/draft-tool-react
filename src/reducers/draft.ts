@@ -119,6 +119,7 @@ const getNextTeam = (currTeam: number, overall: number, numTeams: number) => {
     return currTeam;
 }
 
+export const getDraftId = (state: any) => state.draft.draftId;
 export const getDraft = (state: any) => state.draft;
 export const getDraftConfig = (state: any) => state.draft.draftConfig;
 export const getTeams = (state: any) => Object.keys(state.draft.teams)

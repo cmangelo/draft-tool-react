@@ -6,7 +6,7 @@ import { get } from '../services/superagent';
 export const getPreviousDraftsEffect = () => {
     return async (dispatch: any) => {
         try {
-            const response = await get('drafts');
+            const response = await get('drafts?page=1');
             const draftJSON = response.body;
             dispatch(loadDrafts(draftJSON))
         } catch (err) {

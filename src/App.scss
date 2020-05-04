@@ -1,8 +1,24 @@
+@import "./styles/Variables.scss";
+@import "./styles/Base.scss";
+@import "./styles/Mixins.scss";
 @import "./styles/Rankings.scss";
 @import "./styles/DraftBoard.scss";
 @import "./styles/DraftsList.scss";
 @import "./styles/CreateDraft.scss";
 @import "./styles/FileUpload.scss";
-@import "./styles//Login.scss";
-@import "./styles/Variables.scss";
-@import "./styles/Base.scss";
+@import "./styles/Login.scss";
+@import "./styles/Sidebar.scss";
+
+.App {
+    display: flex;
+    height: 100vh;
+
+    @include for-tablet-portrait-down {
+        flex-direction: column;
+    }
+
+    .content {
+        flex-grow: 1;
+        overflow: auto;
+    }
+}
