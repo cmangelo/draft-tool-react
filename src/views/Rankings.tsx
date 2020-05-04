@@ -53,7 +53,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
     draftPlayer: (playerId: string) => dispatch(draftPlayerEffect(playerId)),
-    togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position)),
+    togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position))
 });
 
 export default connect(

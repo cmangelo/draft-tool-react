@@ -1,8 +1,17 @@
 import './App.scss';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faPlusSquare } from '@fortawesome/free-regular-svg-icons';
-import { faBars, faDoorOpen, faFileUpload, faList, faListOl, faSignInAlt, faTh } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
+import {
+    faBars,
+    faDoorOpen,
+    faFileUpload,
+    faList,
+    faListOl,
+    faPencilAlt,
+    faSignInAlt,
+    faTh,
+} from '@fortawesome/free-solid-svg-icons';
 import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -14,8 +23,18 @@ import DraftArena from './views/DraftArena';
 import DraftsLists from './views/DraftsList';
 import { FileUpload } from './views/FileUpload';
 import { Login } from './views/Login';
+import UserRanks from './views/UserRanks';
 
-library.add(faBars, faList, faFileUpload, faSignInAlt, faListOl, faTh, faDoorOpen, faPlusSquare);
+library.add(faBars,
+	faList,
+	faFileUpload,
+	faSignInAlt,
+	faListOl,
+	faTh,
+	faDoorOpen,
+	faPlusSquare,
+	faEdit,
+	faPencilAlt);
 
 const routes = [
 	{
@@ -37,6 +56,10 @@ const routes = [
 	{
 		path: '/fileUpload',
 		main: (props: any) => <FileUpload {...props} />
+	},
+	{
+		path: '/players',
+		main: (props: any) => <UserRanks {...props} />
 	}
 ]
 

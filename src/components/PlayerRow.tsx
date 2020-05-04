@@ -3,15 +3,44 @@ import React from 'react';
 import { EPosition } from '../models/enums/position.enum';
 import { IPlayer } from '../models/player.interface';
 
-export const PlayerRow: React.FC<{ player: IPlayer, rank: number, draftPlayer: Function }> = (props: { player: IPlayer, rank: number, draftPlayer: Function }) => {
+type props = {
+    player: IPlayer,
+    rank: number,
+    selected?: boolean,
+    draftPlayer?: Function,
+    selectPlayer?: Function
+};
+
+export const PlayerRow: React.FC<props> = (props: props) => {
     const { player, rank } = props;
 
     const draftPlayer = () => {
-        props.draftPlayer(player._id);
+        if (props.draftPlayer)
+            props.draftPlayer(player._id);
+    }
+
+    const selectPlayer = () => {
+        if (props.selectPlayer)
+            props.selectPlayer(player._id)
+    }
+
+    const renderActionButton = () => {
+        if (!!props.draftPlayer)
+            return (
+                <button onClick={draftPlayer} disabled={player.drafted}>Draft</button>
+            )
+        if (!!props.selectPlayer)
+            return (
+                <div>hi</div>
+            )
     }
 
     return (
-        <div className={"player-row " + (player.drafted ? "drafted" : "")}>
+        <div className={"player-row " +
+            (!!props.selectPlayer ? "clickable " : "") +
+            (!!props.draftPlayer && player.drafted ? "drafted " : "") +
+            (!!props.selectPlayer && props.selected ? "selected" : "")}
+            onClick={selectPlayer}>
             <span className="player-rank">{rank}</span>
             <div className="player-name">
                 <div>{player.name}</div>
@@ -23,7 +52,7 @@ export const PlayerRow: React.FC<{ player: IPlayer, rank: number, draftPlayer: F
                 <div>ADP</div>
                 {player.adp}
             </span>
-            <button onClick={draftPlayer} disabled={player.drafted}>Draft</button>
+            {renderActionButton()}
         </div>
     );
 }

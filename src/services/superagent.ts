@@ -11,10 +11,18 @@ export const get = async (endpoint: string): Promise<any> => {
         .set('Authorization', 'Bearer ' + token)
 }
 
-export const post = async (endpoint: string, data: any): Promise<any> => {
+export const post = async (endpoint: string, data?: any): Promise<any> => {
     const token = localStorage.getItem('token');
     return await superagent
         .post(API_ROOT + endpoint)
+        .send(data)
+        .set('Authorization', 'Bearer ' + token);
+}
+
+export const put = async (endpoint: string, data?: any): Promise<any> => {
+    const token = localStorage.getItem('token');
+    return await superagent
+        .put(API_ROOT + endpoint)
         .send(data)
         .set('Authorization', 'Bearer ' + token);
 }

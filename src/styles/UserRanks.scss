@@ -1,0 +1,13 @@
+.UserRanks {
+    display: flex;
+
+    .ranks {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .player-card {
+        flex: 1.5;
+    }
+}

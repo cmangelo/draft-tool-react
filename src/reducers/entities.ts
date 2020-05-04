@@ -1,6 +1,8 @@
 import { draftActionTypes } from '../actions/draft';
 import { entitiesActionTypes } from '../actions/entities';
 import { rankingsActionTypes } from '../actions/rankings';
+import { userRanksActionTypes } from '../actions/user-ranks';
+import { UserRanking } from '../models/enums/user-ranking.enum';
 import { IGroup } from '../models/group.interface';
 import { IPick } from '../models/pick.interface';
 import { IPlayer } from '../models/player.interface';
@@ -21,6 +23,7 @@ const initialState: State = {
 }
 
 export default function (state = initialState, action: { type: string, payload: any }) {
+    let playerId;
     switch (action.type) {
         case entitiesActionTypes.LOAD_PLAYERS_PENDING:
             return {
@@ -43,7 +46,7 @@ export default function (state = initialState, action: { type: string, payload: 
                 groups: action.payload.groups
             }
         case rankingsActionTypes.DRAFT_PLAYER:
-            const playerId = action.payload.playerId as string;
+            playerId = action.payload.playerId as string;
             return {
                 ...state,
                 players: {
@@ -51,6 +54,19 @@ export default function (state = initialState, action: { type: string, payload: 
                     [playerId]: {
                         ...state.players[playerId],
                         drafted: true
+                    }
+                }
+            }
+        case userRanksActionTypes.RANK_PLAYER:
+            const ranking = action.payload.ranking as UserRanking;
+            playerId = action.payload.playerId as string;
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [playerId]: {
+                        ...state.players[playerId],
+                        userRank: ranking
                     }
                 }
             }

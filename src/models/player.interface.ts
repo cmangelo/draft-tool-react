@@ -1,3 +1,5 @@
+import { UserRanking } from './enums/user-ranking.enum';
+
 export interface IPlayer {
     _id: string;
     name: string;
@@ -10,4 +12,5 @@ export interface IPlayer {
     position: number;
     value: number;
     drafted: boolean;
+    userRank: UserRanking;
 }

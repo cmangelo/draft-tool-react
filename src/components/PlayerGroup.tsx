@@ -1,12 +1,20 @@
 import React from 'react';
 
+import { selectPlayer } from '../actions/user-ranks';
 import { EPosition } from '../models/enums/position.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import { PlayerRow } from './PlayerRow';
 
-export const PlayerGroup: React.FC<{ group: IGroup, draftPlayer: Function }> = (props: { group: IGroup, draftPlayer: Function }) => {
+type props = {
+    group: IGroup,
+    selectedPlayer?: string;
+    draftPlayer?: Function,
+    selectPlayer?: Function
+};
+
+export const PlayerGroup: React.FC<props> = (props: props) => {
 
     const allPlayersInTierDrafted = (tier: ITier) => {
         return (tier.players as Array<IPlayer>).every(player => player.drafted)
@@ -36,7 +44,13 @@ export const PlayerGroup: React.FC<{ group: IGroup, draftPlayer: Function }> = (
     const listPlayers = (tier: ITier) => {
         return (tier.players as Array<IPlayer>).map((player: IPlayer, ind: number) => {
             return (
-                <PlayerRow key={player._id} player={player} rank={tier.startingAtRank + ind} draftPlayer={props.draftPlayer}></PlayerRow>
+                <PlayerRow key={player._id}
+                    player={player}
+                    rank={tier.startingAtRank + ind}
+                    draftPlayer={props.draftPlayer}
+                    selectPlayer={props.selectPlayer}
+                    selected={props.selectedPlayer === player._id}>
+                </PlayerRow>
             )
         });
     }
