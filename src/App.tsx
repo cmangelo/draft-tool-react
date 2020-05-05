@@ -4,12 +4,14 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
     faBars,
+    faCheckSquare,
     faDoorOpen,
     faFileUpload,
     faList,
     faListOl,
     faPencilAlt,
     faSignInAlt,
+    faSquare,
     faTh,
 } from '@fortawesome/free-solid-svg-icons';
 import { ConnectedRouter } from 'connected-react-router';
@@ -33,6 +35,8 @@ library.add(faBars,
 	faTh,
 	faDoorOpen,
 	faPlusSquare,
+	faSquare,
+	faCheckSquare,
 	faEdit,
 	faPencilAlt);
 

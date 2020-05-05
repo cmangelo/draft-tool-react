@@ -66,17 +66,32 @@
 
         .player-rank {
             color: $secondary-font-color;
-            flex-basis: 5%;
+            flex-basis: 7%;
             font-size: .9em;
-            margin: auto 0;
-            padding-right: 20px;
-            text-align: right;
+            padding-right: 15px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+
+            &.AllIn {
+                border-right: 5px solid $all-in-green;
+            }
+
+            &.Neutral {
+                border-right: 5px solid $neutral-yellow;
+            }
+
+            &.AllOut {
+                border-right: 5px solid $all-out-red;
+            }
         }
 
         .player-name {
             flex-grow: 1;
             font-size: .9em;
             line-height: 1.2;
+            padding-left: 6px;
 
             .player-team-info {
                 color: $ternary-font-color;
@@ -97,6 +112,34 @@
                 color: $secondary-font-color;
                 font-size: .7em;
                 font-weight: bold;
+            }
+        }
+
+        .rank-options {
+            display: flex;
+            align-items: center;
+
+            .square {
+                height: 20px;
+                width: 20px;
+                border-radius: 3px;
+                margin-left: 7px;
+
+            }
+
+            .all-in {
+                color: $all-in-green;
+                margin-left: 0;
+            }
+
+            .neutral {
+                color: $neutral-yellow;
+                margin-left: 7px;
+            }
+
+            .all-out {
+                color: $all-out-red;
+                margin-left: 7px;
             }
         }
 

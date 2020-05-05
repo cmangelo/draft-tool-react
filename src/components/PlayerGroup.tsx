@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { selectPlayer } from '../actions/user-ranks';
 import { EPosition } from '../models/enums/position.enum';
 import { IGroup } from '../models/group.interface';
 import { IPlayer } from '../models/player.interface';
@@ -11,13 +10,15 @@ type props = {
     group: IGroup,
     selectedPlayer?: string;
     draftPlayer?: Function,
-    selectPlayer?: Function
+    selectPlayer?: Function,
+    rankPlayer?: Function,
+    deleteRank?: Function
 };
 
 export const PlayerGroup: React.FC<props> = (props: props) => {
 
     const allPlayersInTierDrafted = (tier: ITier) => {
-        return (tier.players as Array<IPlayer>).every(player => player.drafted)
+        return !!props.draftPlayer && (tier.players as Array<IPlayer>).every(player => player.drafted)
             ? "all-drafted" : ""
     }
 
@@ -49,6 +50,8 @@ export const PlayerGroup: React.FC<props> = (props: props) => {
                     rank={tier.startingAtRank + ind}
                     draftPlayer={props.draftPlayer}
                     selectPlayer={props.selectPlayer}
+                    rankPlayer={props.rankPlayer}
+                    deleteRank={props.deleteRank}
                     selected={props.selectedPlayer === player._id}>
                 </PlayerRow>
             )

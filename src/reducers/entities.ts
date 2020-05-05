@@ -70,6 +70,18 @@ export default function (state = initialState, action: { type: string, payload: 
                     }
                 }
             }
+        case userRanksActionTypes.DELETE_RANK:
+            playerId = action.payload.playerId as string;
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [playerId]: {
+                        ...state.players[playerId],
+                        userRank: undefined
+                    }
+                }
+            }
         case draftActionTypes.LOAD_DRAFT:
             const picks = action.payload.picks as Array<IPick>;
             const newPlayers = { ...state.players };
@@ -88,4 +100,3 @@ export default function (state = initialState, action: { type: string, payload: 
 export const getPlayers = (state: any) => state.entities.players;
 export const getTiers = (state: any) => state.entities.tiers;
 export const getGroups = (state: any) => state.entities.groups;
-

@@ -26,3 +26,10 @@ export const put = async (endpoint: string, data?: any): Promise<any> => {
         .send(data)
         .set('Authorization', 'Bearer ' + token);
 }
+
+export const del = async (endpoint: string): Promise<any> => {
+    const token = localStorage.getItem('token');
+    return await superagent
+        .delete(API_ROOT + endpoint)
+        .set('Authorization', 'Bearer ' + token);
+}

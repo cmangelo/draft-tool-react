@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { selectPlayer, togglePositionVisible } from '../actions/user-ranks';
 import { GroupSelector } from '../components/GroupSelector';
 import { PlayerGroup } from '../components/PlayerGroup';
+import { deleteRanksEffect } from '../effects/deleteRank';
 import { rankPlayerEffect } from '../effects/rankPlayer';
 import { EPosition } from '../models/enums/position.enum';
 import { UserRanking } from '../models/enums/user-ranking.enum';
@@ -16,7 +17,14 @@ class UserRanks extends React.Component<any, any> {
         if (!this.props.groupsWithPlayers) return;
         return this.props.groupsWithPlayers.map((group: IGroup) => {
             return (
-                <PlayerGroup group={group} selectPlayer={this.props.selectPlayer} selectedPlayer={this.props.selectedPlayer} key={group._id}></PlayerGroup>
+                <PlayerGroup
+                    group={group}
+                    rankPlayer={this.props.rankPlayer}
+                    deleteRank={this.props.deleteRank}
+                    selectPlayer={this.props.selectPlayer}
+                    selectedPlayer={this.props.selectedPlayer}
+                    key={group._id}>
+                </PlayerGroup>
             );
         });
     }
@@ -43,6 +51,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     selectPlayer: (playerId: string) => dispatch(selectPlayer(playerId)),
     rankPlayer: (playerId: string, ranking: UserRanking) => dispatch(rankPlayerEffect(playerId, ranking)),
+    deleteRank: (playerId: string) => dispatch(deleteRanksEffect(playerId)),
     togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position)),
 });
 
