@@ -48,7 +48,7 @@ class UserRanks extends React.Component<any, any> {
                     {this.renderGroup()}
                 </div>
                 <div className="player-card">
-                    <Player player={this.props.selectedPlayer}></Player>
+                    <Player player={this.props.selectedPlayer} deleteRank={this.props.deleteRank} rankPlayer={this.props.rankPlayer}></Player>
                 </div>
             </div>
         )

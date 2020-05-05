@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
 import { EPosition } from '../models/enums/position.enum';
 import { UserRanking } from '../models/enums/user-ranking.enum';
 import { IPlayer } from '../models/player.interface';
+import { UserRankWidget } from './UserRankWidget';
 
 type props = {
     player: IPlayer,
@@ -28,28 +28,19 @@ export const PlayerRow: React.FC<props> = (props: props) => {
             props.selectPlayer(player._id)
     }
 
-    const rankPlayer = (rank: UserRanking, $event?: any) => {
-        $event.stopPropagation();
-        if (!props.rankPlayer || !props.deleteRank) return;
-        if (props.player.userRank !== rank) {
-            props.rankPlayer(player._id, rank)
-        } else {
-            props.deleteRank(player._id);
-        }
-    }
-
     const renderActionButton = () => {
         if (!!props.draftPlayer)
             return (
                 <button onClick={draftPlayer} disabled={player.drafted}>Draft</button>
             )
-        if (!!props.selectPlayer)
+        if (!!props.rankPlayer && !!props.deleteRank)
             return (
-                <div className="rank-options">
-                    <FontAwesomeIcon icon={player.userRank === UserRanking.AllIn ? "check-square" : "square"} size="lg" className="all-in" onClick={($event) => rankPlayer(UserRanking.AllIn, $event)} />
-                    <FontAwesomeIcon icon={player.userRank === UserRanking.Neutral ? "check-square" : "square"} size="lg" className="neutral" onClick={($event) => rankPlayer(UserRanking.Neutral, $event)} />
-                    <FontAwesomeIcon icon={player.userRank === UserRanking.AllOut ? "check-square" : "square"} size="lg" className="all-out" onClick={($event) => rankPlayer(UserRanking.AllOut, $event)} />
-                </div>
+                <UserRankWidget
+                    player={player}
+                    rankPlayer={props.rankPlayer}
+                    deleteRank={props.deleteRank}
+                    size="lg">
+                </UserRankWidget>
             )
     }
 
