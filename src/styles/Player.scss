@@ -1,0 +1,39 @@
+.Player {
+    h1 {
+        font-weight: normal;
+    }
+
+    p {
+        max-width: 100%;
+    }
+
+    .info-cells {
+        border: $default-border;
+        border-radius: 5px;
+        display: flex;
+
+        .cell {
+            padding: 7px;
+            border-right: $default-border;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            justify-content: space-between;
+            align-items: center;
+
+            .cell-header {
+                font-size: .8em;
+                font-weight: bolder;
+                color: $ternary-font-color;
+            }
+
+            .cell-data {
+                font-size: 1.1em;
+            }
+
+            &:last-of-type {
+                border-right: none;
+            }
+        }
+    }
+}

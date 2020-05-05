@@ -8,14 +8,14 @@ import { IPick } from '../models/pick.interface';
 import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 
-interface State {
+export interface EntitiesState {
     players: { [key: string]: IPlayer }
     tiers: { [key: string]: ITier }
     groups: { [key: string]: IGroup },
     loading: boolean
 }
 
-const initialState: State = {
+const initialState: EntitiesState = {
     players: {},
     tiers: {},
     groups: {},
@@ -91,6 +91,17 @@ export default function (state = initialState, action: { type: string, payload: 
             return {
                 ...state,
                 players: newPlayers
+            }
+        case userRanksActionTypes.GET_PLAYER_DETAIL_SUCCESS:
+            return {
+                ...state,
+                players: {
+                    ...state.players,
+                    [action.payload.player._id]: {
+                        ...state.players[action.payload.player._id],
+                        ...action.payload.player
+                    }
+                }
             }
         default:
             return state;

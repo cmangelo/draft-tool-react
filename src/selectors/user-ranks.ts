@@ -10,7 +10,7 @@ import { getVisibleGroups } from '../reducers/user-ranks';
 export const getGroupsWithPlayers = createSelector(
     [getPlayers, getTiers, getGroups, getVisibleGroups],
     (players: { [_id: string]: IPlayer }, tiers: { [_id: string]: ITier }, groups: { [_id: string]: IGroup }, visibleGroups: { [key: number]: boolean }) => {
-        if (!Object.keys(players).length || !Object.keys(tiers).length || !Object.keys(groups).length) return [];
+        if (!Object.keys(players).length || !Object.keys(tiers).length || !Object.keys(groups).length || !visibleGroups) return [];
 
         return createGroups(players, tiers, groups, visibleGroups);
     }

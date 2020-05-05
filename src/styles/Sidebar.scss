@@ -2,6 +2,7 @@
     border-right: $default-border;
     height: 100vh;
     width: $sidebar-width;
+    flex-shrink: 0;
 
     nav {
         align-items: center;
