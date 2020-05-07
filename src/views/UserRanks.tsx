@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
 import { togglePositionVisible } from '../actions/user-ranks';
 import { GroupSelector } from '../components/GroupSelector';
@@ -15,11 +16,26 @@ import { UserRanking } from '../models/enums/user-ranking.enum';
 import { IGroup } from '../models/group.interface';
 import { getSelectedPlayer, getVisibleGroups } from '../reducers/user-ranks';
 import { getGroupsWithPlayers } from '../selectors/user-ranks';
+import { screenSizes } from '../services/window';
 
 class UserRanks extends React.Component<any, any> {
     componentDidMount() {
-        this.props.getGroupsAndTiers();
-        this.props.getPlayers();
+        if (!this.props.groupsWithPlayers || this.props.groupsWithPlayers.length === 0)
+            Promise.all([this.props.getGroupsAndTiers(), this.props.getPlayers()])
+                .then(() => {
+                    let playerId = this.getPlayerId();
+                    if (!playerId) {
+                        playerId = this.props.groupsWithPlayers[0]?.tiers[0]?.players[0]._id;
+                    }
+                    const navigate = window.innerWidth > screenSizes.S;
+                    this.props.selectPlayer(playerId, navigate);
+                });
+    }
+
+    getPlayerId() {
+        const segments = this.props.location.pathname.split('/');
+        if (segments[segments.length - 1] !== 'players')
+            return segments[segments.length - 1];
     }
 
     renderGroup() {
@@ -39,17 +55,22 @@ class UserRanks extends React.Component<any, any> {
     }
 
     render() {
-        if (!this.props.selectedPlayer)
-            this.props.selectPlayer(this.props.groupsWithPlayers[0]?.tiers[0]?.players[0]._id);
         return (
             <div className="UserRanks">
                 <div className="ranks">
                     <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
                     {this.renderGroup()}
                 </div>
-                <div className="player-card">
-                    <Player player={this.props.selectedPlayer} deleteRank={this.props.deleteRank} rankPlayer={this.props.rankPlayer}></Player>
-                </div>
+                {
+                    window.innerWidth > screenSizes.S &&
+                    <div className="player-card">
+                        <Switch>
+                            <Route path="/players/:playerId" >
+                                <Player />
+                            </Route>
+                        </Switch>
+                    </div>
+                }
             </div>
         )
     }
@@ -64,7 +85,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     getGroupsAndTiers: () => dispatch(getGroupsAndTiersEffect()),
     getPlayers: () => dispatch(getPlayersEffect()),
-    selectPlayer: (playerId: string) => dispatch(getPlayerDetailEffect(playerId)),
+    selectPlayer: (playerId: string, navigate: boolean = true) => dispatch(getPlayerDetailEffect(playerId, navigate)),
     rankPlayer: (playerId: string, ranking: UserRanking) => dispatch(rankPlayerEffect(playerId, ranking)),
     deleteRank: (playerId: string) => dispatch(deleteRanksEffect(playerId)),
     togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position)),

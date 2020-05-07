@@ -6,7 +6,7 @@
     -webkit-overflow-scrolling: touch;
 
     @include for-tablet-portrait-down {
-        max-height: calc(100vh - #{$bottom-bar-height} - 58px);
+        max-height: calc(100vh - #{$bottom-bar-height} - 60px) !important;
     }
 
     &:first-of-type {

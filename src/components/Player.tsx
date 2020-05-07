@@ -1,17 +1,30 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { deleteRanksEffect } from '../effects/deleteRank';
+import { getPlayerDetailEffect } from '../effects/getPlayerDetail';
+import { rankPlayerEffect } from '../effects/rankPlayer';
 import { EPosition } from '../models/enums/position.enum';
-import { IPlayer } from '../models/player.interface';
+import { UserRanking } from '../models/enums/user-ranking.enum';
+import { getSelectedPlayer } from '../reducers/user-ranks';
+import { screenSizes } from '../services/window';
 import { UserRankWidget } from './UserRankWidget';
 
-type props = {
-    player: IPlayer,
-    rankPlayer: Function,
-    deleteRank: Function
-}
+export const Player: React.FC = (props: any) => {
+    const player = useSelector(getSelectedPlayer);
+    const dispatch = useDispatch();
+    const smallScreen = window.innerWidth < screenSizes.S;
 
-export const Player: React.FC<props> = (props: props) => {
-    const { player, rankPlayer, deleteRank } = props;
+    const rankPlayer = (playerId: string, ranking: UserRanking) => dispatch(rankPlayerEffect(playerId, ranking));
+    const deleteRank = (playerId: string) => dispatch(deleteRanksEffect(playerId));
+
+    //if we dont have a player but we have props.match, then we know this 
+    //component is being rendered as its own route
+    if (!player && !!props.match) {
+        const playerId = props.match.params.playerId;
+        dispatch(getPlayerDetailEffect(playerId, false));
+    }
 
     const getRiskClass = (risk: number) => {
         if (risk > 7)
@@ -21,10 +34,15 @@ export const Player: React.FC<props> = (props: props) => {
         return 'low-risk';
     }
 
+    const goBack = () => {
+        props.history.goBack();
+    }
+
     return (
         <div className="Player">
             <h1>
-                <span>{player?.name}</span>
+                {smallScreen && <FontAwesomeIcon icon="chevron-left" className="icon" onClick={goBack} />}
+                <span className="name">{player?.name}</span>
                 <span className="position">{EPosition[player?.position]}</span>
             </h1>
             <div className="info-cells">

@@ -1,13 +1,31 @@
 .Player {
+    margin: 15px;
+
     h1 {
         font-weight: normal;
         display: flex;
-        justify-content: space-between;
+        align-items: center;
+
+        .icon {
+            margin-right: 15px;
+        }
+
+        .name {
+            flex-grow: 1;
+        }
 
         .position {
             color: $ternary-font-color;
             font-weight: lighter;
             padding-right: 15px;
+        }
+
+        @include for-tablet-portrait-down {
+            font-size: 26px;
+
+            .name {
+                text-align: center;
+            }
         }
     }
 

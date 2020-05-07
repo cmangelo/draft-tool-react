@@ -14,8 +14,10 @@ export const Sidebar: React.FC<{ isLoggedIn: boolean }> = (props: { isLoggedIn: 
         return locationSegments[1] === 'drafts' && locationSegments.length > 2 && locationSegments[2] !== 'create';
     }
 
-    const isActiveLink = (link: string) => {
-        return locationSegments[locationSegments.length - 1] === link;
+    const isActiveLink = (link: string, lastOnly?: boolean) => {
+        if (lastOnly)
+            return locationSegments[locationSegments.length - 1] === link;
+        return locationSegments.some(segment => segment === link);
     }
 
     const getLinks = () => {
@@ -42,11 +44,11 @@ export const Sidebar: React.FC<{ isLoggedIn: boolean }> = (props: { isLoggedIn: 
             } else {
                 return (
                     <nav>
-                        <Link to="/drafts" className={isActiveLink('drafts') ? 'active' : ''}>
+                        <Link to="/drafts" className={isActiveLink('drafts', true) ? 'active' : ''}>
                             <FontAwesomeIcon icon="list" className="icon" />
                             <div>Drafts</div>
                         </Link>
-                        <Link to="/drafts/create" className={isActiveLink('create') ? 'active' : ''}>
+                        <Link to="/drafts/create" className={isActiveLink('create', true) ? 'active' : ''}>
                             <FontAwesomeIcon icon={["far", "plus-square"]} className="far icon" />
                             <div>New Draft</div>
                         </Link>
