@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
 import { setDraftId } from '../actions/draft';
+import { Player } from '../components/Player';
 import { getGroupsAndTiersEffect } from '../effects/getGroupsAndTiers';
 import { getPlayersEffect } from '../effects/getPlayers';
 import DraftBoard from './DraftBoard';
@@ -20,6 +21,9 @@ class DraftArena extends React.Component<any, any> {
         return (
             <div>
                 <Switch>
+                    <Route path="/drafts/:draftId/rankings/players/:playerId">
+                        <Player {...this.props} />
+                    </Route>
                     <Route path="/drafts/:draftId/rankings" >
                         <Rankings />
                     </Route>

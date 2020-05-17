@@ -17,8 +17,6 @@ import { getVisibleGroups } from '../reducers/rankings';
 import { getGroupsWithPlayers } from '../selectors/rankings';
 import { screenSizes } from '../services/window';
 
-// import { selectPlayer } from '../actions/user-ranks';
-
 interface RankingsState {
     players: { [key: string]: IPlayer };
     groups: { [key: string]: IGroup };
@@ -29,6 +27,7 @@ interface RankingsState {
 class Rankings extends React.Component<any, RankingsState> {
     isModalOpen: boolean = false;
     styles = {
+        content: { maxWidth: '575px', margin: 'auto' },
         overlay: { zIndex: 1000 }
     };
 
@@ -43,8 +42,10 @@ class Rankings extends React.Component<any, RankingsState> {
     }
 
     playerSelected(playerId: string) {
-        this.props.selectPlayer(playerId);
-        this.setState((state) => ({ ...state, isModalOpen: true }));
+        const navigate = window.innerWidth <= screenSizes.S;
+        this.props.selectPlayer(playerId, navigate);
+        if (!navigate)
+            this.setState((state) => ({ ...state, isModalOpen: true }));
     }
 
     closeModal() {
@@ -87,7 +88,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: any) => ({
     draftPlayer: (playerId: string) => dispatch(draftPlayerEffect(playerId)),
     togglePositionVisible: (position: EPosition) => dispatch(togglePositionVisible(position)),
-    selectPlayer: (playerId: string) => dispatch(getPlayerDetailEffect(playerId, false))
+    selectPlayer: (playerId: string, navigate: boolean) => dispatch(getPlayerDetailEffect(playerId, navigate, true))
 });
 
 export default connect(

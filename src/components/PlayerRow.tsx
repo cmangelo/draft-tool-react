@@ -18,7 +18,8 @@ type props = {
 export const PlayerRow: React.FC<props> = (props: props) => {
     const { player, rank } = props;
 
-    const draftPlayer = () => {
+    const draftPlayer = ($event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        $event.stopPropagation();
         if (props.draftPlayer)
             props.draftPlayer(player._id);
     }
@@ -31,7 +32,7 @@ export const PlayerRow: React.FC<props> = (props: props) => {
     const renderActionButton = () => {
         if (!!props.draftPlayer)
             return (
-                <button onClick={draftPlayer} disabled={player.drafted}>Draft</button>
+                <button onClick={($event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => draftPlayer($event)} disabled={player.drafted}>Draft</button>
             )
         if (!!props.rankPlayer && !!props.deleteRank)
             return (

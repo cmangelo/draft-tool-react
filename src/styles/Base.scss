@@ -15,3 +15,11 @@ button {
 .clickable {
     cursor: pointer;
 }
+
+.ReactModalPortal {
+    svg.fa-times {
+        float: right;
+        cursor: pointer;
+        color: $secondary-font-color;
+    }
+}
