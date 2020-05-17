@@ -20,19 +20,26 @@ import { screenSizes } from '../services/window';
 
 class UserRanks extends React.Component<any, any> {
     componentDidMount() {
-        if (!this.props.groupsWithPlayers || this.props.groupsWithPlayers.length === 0)
+        if (!this.props.groupsWithPlayers || this.props.groupsWithPlayers.length === 0) {
             Promise.all([this.props.getGroupsAndTiers(), this.props.getPlayers()])
                 .then(() => {
-                    let playerId = this.getPlayerId();
-                    if (!playerId) {
-                        playerId = this.props.groupsWithPlayers[0]?.tiers[0]?.players[0]._id;
-                    }
-                    const navigate = window.innerWidth > screenSizes.S;
-                    this.props.selectPlayer(playerId, navigate);
+                    this.getPlayer();
                 });
+        } else {
+            this.getPlayer();
+        }
     }
 
-    getPlayerId() {
+    getPlayer() {
+        let playerId = this.getPlayerIdFromRoute();
+        if (!playerId) {
+            playerId = this.props.groupsWithPlayers[0]?.tiers[0]?.players[0]._id;
+        }
+        const navigate = window.innerWidth > screenSizes.S;
+        this.props.selectPlayer(playerId, navigate);
+    }
+
+    getPlayerIdFromRoute() {
         const segments = this.props.location.pathname.split('/');
         if (segments[segments.length - 1] !== 'players')
             return segments[segments.length - 1];

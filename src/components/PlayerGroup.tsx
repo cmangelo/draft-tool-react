@@ -8,7 +8,7 @@ import { PlayerRow } from './PlayerRow';
 
 type props = {
     group: IGroup,
-    selectedPlayer?: string;
+    selectedPlayer?: IPlayer;
     draftPlayer?: Function,
     selectPlayer?: Function,
     rankPlayer?: Function,
@@ -52,7 +52,7 @@ export const PlayerGroup: React.FC<props> = (props: props) => {
                     selectPlayer={props.selectPlayer}
                     rankPlayer={props.rankPlayer}
                     deleteRank={props.deleteRank}
-                    selected={props.selectedPlayer === player._id}>
+                    selected={props.selectedPlayer?._id === player._id}>
                 </PlayerRow>
             )
         });
