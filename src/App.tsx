@@ -14,9 +14,11 @@ import {
     faSignInAlt,
     faSquare,
     faTh,
+    faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
+import Modal from 'react-modal';
 import { Route, Switch } from 'react-router-dom';
 
 import { Player } from './components/Player';
@@ -42,7 +44,8 @@ library.add(faBars,
 	faCheckSquare,
 	faEdit,
 	faPencilAlt,
-	faChevronLeft);
+	faChevronLeft,
+	faTimes);
 
 const routes = [
 	{
@@ -74,8 +77,9 @@ const routes = [
 		path: '/players',
 		main: (props: any) => <UserRanks {...props} />
 	}
-]
+];
 
+Modal.setAppElement('#root');
 
 const App: React.FC = () => {
 	const loggedIn = !!localStorage.getItem('token');

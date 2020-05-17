@@ -41,22 +41,4 @@ export default function (state = initialState, action: { type: string, payload: 
 
 export const getVisibleGroups = (state: any) => state.userRanks.visibleGroups;
 
-export const getSelectedPlayer = (state: any) => state.entities.players[state.userRanks.selectedPlayer];//{
-// get
-// if (!state || !state.userRanks.visibleGroups) return;
-// if (state.userRanks.selectedPlayer && state.entities.players)
-//     return state.entities.players[state.userRanks.selectedPlayer];
-// return getGroupsWithPlayers(state)[0];
-// const visiblePosition = Object.keys(state.userRanks.visibleGroups).find(group => state.userRanks.visibleGroups[group]) as unknown as number;
-// console.log(visiblePosition)
-// return state.entities.players.find((player: IPlayer) => player.position === visiblePosition && player.)
-// }
-
-// export const getSelectedPlayer2 = createSelector(
-//     [getSelectedPlayer, getPlayers, getGroupsWithPlayers],
-//     (playerId, players, groups) => {
-//         if (!!playerId)
-//             return players[playerId];
-//         return groups[0];
-//     }
-// )
+export const getSelectedPlayer = (state: any) => state.entities.players[state.userRanks.selectedPlayer];
