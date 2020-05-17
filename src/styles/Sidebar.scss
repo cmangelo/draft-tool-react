@@ -2,6 +2,7 @@
     border-right: $default-border;
     height: 100vh;
     width: $sidebar-width;
+    flex-shrink: 0;
 
     nav {
         align-items: center;
@@ -50,7 +51,7 @@
             justify-content: space-between;
 
             a {
-                margin: 0 30px;
+                margin: 3px 20px 0;
 
                 div {
                     font-size: 12px;
@@ -59,6 +60,7 @@
 
                 .icon {
                     font-size: 20px;
+                    margin-bottom: 3px;
                 }
             }
         }

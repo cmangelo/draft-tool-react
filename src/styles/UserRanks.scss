@@ -1,0 +1,22 @@
+.UserRanks {
+    display: flex;
+
+    .ranks {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+
+        .Group {
+            border: none;
+            max-height: calc(100vh - 58px);
+        }
+    }
+
+    .player-card {
+        flex: 1.5;
+        margin: 10px;
+        padding: 0 15px;
+        border: $default-border;
+        border-radius: 5px;
+    }
+}

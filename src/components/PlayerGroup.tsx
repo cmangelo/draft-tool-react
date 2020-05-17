@@ -6,10 +6,19 @@ import { IPlayer } from '../models/player.interface';
 import { ITier } from '../models/tier.interface';
 import { PlayerRow } from './PlayerRow';
 
-export const PlayerGroup: React.FC<{ group: IGroup, draftPlayer: Function }> = (props: { group: IGroup, draftPlayer: Function }) => {
+type props = {
+    group: IGroup,
+    selectedPlayer?: IPlayer;
+    draftPlayer?: Function,
+    selectPlayer?: Function,
+    rankPlayer?: Function,
+    deleteRank?: Function
+};
+
+export const PlayerGroup: React.FC<props> = (props: props) => {
 
     const allPlayersInTierDrafted = (tier: ITier) => {
-        return (tier.players as Array<IPlayer>).every(player => player.drafted)
+        return !!props.draftPlayer && (tier.players as Array<IPlayer>).every(player => player.drafted)
             ? "all-drafted" : ""
     }
 
@@ -36,7 +45,15 @@ export const PlayerGroup: React.FC<{ group: IGroup, draftPlayer: Function }> = (
     const listPlayers = (tier: ITier) => {
         return (tier.players as Array<IPlayer>).map((player: IPlayer, ind: number) => {
             return (
-                <PlayerRow key={player._id} player={player} rank={tier.startingAtRank + ind} draftPlayer={props.draftPlayer}></PlayerRow>
+                <PlayerRow key={player._id}
+                    player={player}
+                    rank={tier.startingAtRank + ind}
+                    draftPlayer={props.draftPlayer}
+                    selectPlayer={props.selectPlayer}
+                    rankPlayer={props.rankPlayer}
+                    deleteRank={props.deleteRank}
+                    selected={props.selectedPlayer?._id === player._id}>
+                </PlayerRow>
             )
         });
     }
