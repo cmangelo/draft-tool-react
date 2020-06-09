@@ -44,7 +44,15 @@ class DraftsList extends React.Component<any, any> {
                 <div>
                     <h1>My Drafts</h1>
                     <div className="list">
-                        {this.renderDraftsList()}
+                        {this.props.drafts && this.props.drafts.length
+                            ? this.renderDraftsList()
+                            : (
+                                <div className="no-drafts">
+                                    <p>You haven't started any drafts.</p>
+                                    <button onClick={this.createDraft.bind(this)}>Create a Draft</button>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
             </div>
