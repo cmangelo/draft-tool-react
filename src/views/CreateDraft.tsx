@@ -11,7 +11,7 @@ class CreateDraft extends React.Component<any, any> {
             settings: {
                 QBs: { value: 1, name: 'QB' },
                 RBs: { value: 2, name: 'RB' },
-                WRs: { value: 2, name: 'WB' },
+                WRs: { value: 2, name: 'WR' },
                 TEs: { value: 1, name: 'TE' },
                 FLEX: { value: 1, name: 'Flex' },
                 BENCH: { value: 6, name: 'Bench' },
@@ -93,14 +93,17 @@ class CreateDraft extends React.Component<any, any> {
     render() {
         return (
             <div className="CreateDraft">
-                {this.renderDraftOptions()}
-                <button onClick={this.createDraft.bind(this)}>Create Draft</button>
+                <h1>Create a Draft</h1>
+                <div className="card">
+                    {this.renderDraftOptions()}
+                </div>
+                <div className="button-container">
+                    <button onClick={this.createDraft.bind(this)}>Create Draft</button>
+                </div>
             </div>
         )
     }
-
 }
-
 
 const mapStateToProps = (state: any) => ({
 });

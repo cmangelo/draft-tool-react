@@ -56,10 +56,10 @@ export const Sidebar: React.FC<{ isLoggedIn: boolean }> = (props: { isLoggedIn: 
                             <FontAwesomeIcon icon="pencil-alt" className="icon" />
                             <div>My Ranks</div>
                         </Link>
-                        <Link to="/fileUpload" className={isActiveLink('fileUpload') ? 'active' : ''}>
+                        {/* <Link to="/fileUpload" className={isActiveLink('fileUpload') ? 'active' : ''}>
                             <FontAwesomeIcon icon="file-upload" className="icon" />
                             <div>Upload</div>
-                        </Link>
+                        </Link> */}
                     </nav>
                 );
             }

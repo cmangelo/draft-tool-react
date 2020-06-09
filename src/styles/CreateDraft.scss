@@ -4,10 +4,19 @@
     max-width: 550px;
     margin: 0 auto;
 
+    h1 {
+        font-weight: lighter;
+        margin-left: 15px;
+        margin-bottom: 0;
+    }
+
+    .button-container {
+        padding: 0 15px;
+    }
+
     button {
         color: white;
         width: 100%;
-        margin-bottom: 15px;
         border-radius: 30px;
         padding: 10px;
         font-size: 1.1em;
@@ -18,53 +27,64 @@
         }
     }
 
-    .draft-option {
-        display: flex;
-        justify-content: space-between;
-        padding: 8px 0;
-        align-items: center;
+    .card {
+        border: $default-border;
+        border-radius: 5px;
+        padding: 15px;
+        margin: 15px;
 
-        .name {
-            flex: 1;
+        @include for-tablet-portrait-down {
+            border: none;
         }
 
-        .incrementer {
-            border: $dark-border;
-            border-radius: 5px;
+        .draft-option {
             display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
             align-items: center;
-            height: 40px;
-            overflow: hidden;
 
-            >div {
-                font-size: 2em;
-                font-weight: bold;
-                width: 45px;
-                text-align: center;
-                height: auto;
-                background-color: $medium-grey;
-                padding-bottom: 6px;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: $dark-grey;
-                }
+            .name {
+                flex: 1;
             }
 
-            input {
-                border: none;
-                height: calc(100% - 2px);
-                width: 45px;
-                border-left: $default-border;
-                border-right: $default-border;
-                -webkit-appearance: none;
-                font-size: 1.2em;
-                text-align: center;
+            .incrementer {
+                border: $default-border;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                height: 40px;
+                overflow: hidden;
 
-                &::-webkit-outer-spin-button,
-                &::-webkit-inner-spin-button {
+                >div {
+                    font-size: 2em;
+                    font-weight: bold;
+                    width: 45px;
+                    text-align: center;
+                    height: auto;
+                    background-color: $light-grey;
+                    padding-bottom: 6px;
+                    cursor: pointer;
+
+                    &:hover {
+                        background-color: $medium-grey;
+                    }
+                }
+
+                input {
+                    border: none;
+                    height: calc(100% - 2px);
+                    width: 45px;
+                    border-left: $default-border;
+                    border-right: $default-border;
                     -webkit-appearance: none;
-                    margin: 0;
+                    font-size: 1.2em;
+                    text-align: center;
+
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
                 }
             }
         }
