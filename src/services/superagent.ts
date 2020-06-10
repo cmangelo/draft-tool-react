@@ -1,7 +1,7 @@
 import superagent from 'superagent';
 
-const localDev = true;
-const API_ROOT = localDev ? 'http://localhost:3000/' : 'http://157.245.231.113/api/';
+const localDev = false;
+const API_ROOT = localDev ? 'http://localhost:3000/' : 'https://draft-tool-api-test.herokuapp.com/';
 
 export const get = async (endpoint: string): Promise<any> => {
     const token = localStorage.getItem('token');
