@@ -30,7 +30,7 @@
   },
   "scripts": {
     "postinstall": "npm run build",
-    "start": "node src/server.js",
+    "start": "node server.js",
     "serve": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
