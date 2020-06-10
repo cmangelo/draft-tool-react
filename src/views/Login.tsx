@@ -1,20 +1,29 @@
 import React, { FormEvent, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { userLoggedIn } from '../actions/user';
+import { getIsUserLoggedIn } from '../reducers/user';
 import { post } from '../services/superagent';
 
 export const Login: React.FC = (props: any) => {
     const [errorMessage, setErrorMessage] = useState('');
     const [showLogin, setShowLogin] = useState(true);
+    const isUserLoggedIn = useSelector(getIsUserLoggedIn);
 
+    if (isUserLoggedIn)
+        props.history.push('/drafts');
+
+    const dispatch = useDispatch();
     const onLoginFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const target = event.target as any;
         const username = target.elements.username.value.trim();
         const password = target.elements.password.value.trim();
         post('users/login', { username, password }).then((response: any) => {
-            const json = response.body;
-            localStorage.setItem('token', json.token)
+            const json = JSON.stringify(response.body);
+            localStorage.setItem('user', json)
             props.history.push('/drafts');
+            dispatch(userLoggedIn());
         }, error => {
             if (error.status === 400) {
                 setErrorMessage('Invalid username or password');
@@ -34,6 +43,7 @@ export const Login: React.FC = (props: any) => {
             const json = response.body;
             localStorage.setItem('token', json.token)
             props.history.push('/drafts');
+            dispatch(userLoggedIn());
         }, error => {
             if (error.status === 400) {
                 setErrorMessage('Invalid username or password');

@@ -12,6 +12,7 @@ import {
     faListOl,
     faPencilAlt,
     faSignInAlt,
+    faSignOutAlt,
     faSquare,
     faTh,
     faTimes,
@@ -45,7 +46,8 @@ library.add(faBars,
 	faEdit,
 	faPencilAlt,
 	faChevronLeft,
-	faTimes);
+	faTimes,
+	faSignOutAlt);
 
 const routes = [
 	{
@@ -82,12 +84,10 @@ const routes = [
 Modal.setAppElement('#root');
 
 const App: React.FC = () => {
-	const loggedIn = !!localStorage.getItem('token');
-
 	return (
 		<div className="App container">
 			<ConnectedRouter history={history} >
-				<Sidebar isLoggedIn={loggedIn}></Sidebar>
+				<Sidebar />
 				<div className="content">
 					<Switch>
 						{routes.filter(route => !route.onlyMobile || window.innerWidth < screenSizes.S)

@@ -40,5 +40,4 @@ export default function (state = initialState, action: { type: string, payload: 
 }
 
 export const getVisibleGroups = (state: any) => state.userRanks.visibleGroups;
-
 export const getSelectedPlayer = (state: any) => state.entities.players[state.userRanks.selectedPlayer];

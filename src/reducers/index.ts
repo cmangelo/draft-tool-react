@@ -4,6 +4,7 @@ import { combineReducers } from 'redux';
 import draft from './draft';
 import entities from './entities';
 import rankings from './rankings';
+import user from './user';
 import userRanks from './user-ranks';
 
 const createRootReducer = (history: any) => combineReducers({
@@ -11,7 +12,8 @@ const createRootReducer = (history: any) => combineReducers({
     entities,
     rankings,
     draft,
-    userRanks
+    userRanks,
+    user
 });
 
 export default createRootReducer;
