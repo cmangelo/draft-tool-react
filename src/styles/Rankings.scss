@@ -1,15 +1,18 @@
 @import './Variables.scss';
 
 .Rankings {
-    display: flex;
-    flex-direction: column;
 
-    .Group {
-        width: 100%;
-    }
-
-    .groups {
+    .ranks {
         display: flex;
-        margin: 3px 0;
+        flex-direction: column;
+
+        .Group {
+            width: 100%;
+        }
+
+        .groups {
+            display: flex;
+            margin: 3px 0;
+        }
     }
 }

@@ -2,10 +2,10 @@ import superagent from 'superagent';
 
 import { User } from '../models/user.interface';
 
-const localDev = false;
+const localDev = true;
 const API_ROOT = localDev ? 'http://localhost:3000/' : 'https://draft-tool-api-test.herokuapp.com/';
 
-const getToken = () => {
+export const getToken = () => {
     const userAsString = localStorage.getItem('user');
     if (!userAsString)
         return;

@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { FileWithPath, useDropzone } from 'react-dropzone';
 import superagent from 'superagent';
 
+import { getToken } from '../services/superagent';
 import { endpoint } from '../store/storeConfig';
 
 export const FileUpload: React.FC = () => {
@@ -9,9 +10,7 @@ export const FileUpload: React.FC = () => {
 	const [error, setError] = useState('');
 
 	const onDrop = useCallback(async acceptedFiles => {
-		console.log(acceptedFiles)
-		console.log(position)
-		const token = localStorage.getItem('token');
+		const token = getToken();
 		const file: FileWithPath = acceptedFiles[0];
 		const formData = new FormData();
 		formData.append('players', file);
