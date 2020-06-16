@@ -9,6 +9,10 @@
         .Group {
             border: none;
             max-height: calc(100vh - 58px);
+
+            @include for-tablet-portrait-down {
+                max-height: calc(100vh - 111px);
+            }
         }
     }
 
