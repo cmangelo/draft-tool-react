@@ -1,5 +1,3 @@
-@import './Variables.scss';
-
 .DraftBoard {
     display: flex;
     flex-direction: row;
@@ -12,6 +10,7 @@
 
     @media only screen and (min-width: 1380px) {
         justify-content: center;
+        width: auto;
     }
 
     .team-column {
@@ -73,34 +72,34 @@
             }
 
             &.QB {
-                background-color: #ff2b6d;
+                background-color: $qb;
             }
 
             &.RB {
-                background-color: #00ceb8;
+                background-color: $rb;
             }
 
             &.WR {
-                background-color: #58a7ff;
+                background-color: $wr;
             }
 
             &.TE {
-                background-color: #ffae58;
+                background-color: $te;
             }
 
-            &.DEF {
-                background-color: #022047;
+            &.DST {
+                background-color: $defense;
             }
 
             &.K {
-                background-color: #bd66ff;
+                background-color: $kicker;
             }
 
             &.QB,
             &.RB,
             &.WR,
             &.TE,
-            &.DEF,
+            &.DST,
             &.K {
                 .round-pick {
                     color: #fff;

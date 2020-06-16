@@ -5,6 +5,7 @@ import { ITier } from '../models/tier.interface';
 export const entitiesActionTypes = {
     LOAD_PLAYERS_PENDING: '[Rankings] Load Players Pending',
     LOAD_PLAYERS: '[Rankings] Load Players',
+    LOAD_SPECIAL_PLAYERS: '[Rankings] Load Special Players',
     LOAD_TIERS: '[Rankings] Load Tiers',
     LOAD_GROUPS: '[Rankings] Load Groups'
 };
@@ -17,6 +18,14 @@ export const loadPlayers = (players: { [id: string]: IPlayer }) => ({
     type: entitiesActionTypes.LOAD_PLAYERS,
     payload: {
         players
+    }
+});
+
+export const loadSpecialPlayers = (defenseId: string, kickerId: string) => ({
+    type: entitiesActionTypes.LOAD_SPECIAL_PLAYERS,
+    payload: {
+        defenseId,
+        kickerId
     }
 });
 

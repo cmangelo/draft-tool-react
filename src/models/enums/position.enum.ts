@@ -3,5 +3,7 @@ export enum EPosition {
     RB,
     WR,
     TE,
-    FLEX
+    FLEX,
+    K,
+    DST
 }

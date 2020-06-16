@@ -1,13 +1,8 @@
 .Group {
     border-left: $default-border;
-    max-height: calc(100vh - 6px);
     overflow: auto;
     padding: 0 10px;
     -webkit-overflow-scrolling: touch;
-
-    @include for-tablet-portrait-down {
-        max-height: calc(100vh - #{$bottom-bar-height} - 60px) !important;
-    }
 
     &:first-of-type {
         border-left: none;

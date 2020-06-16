@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import { connect } from 'react-redux';
 
 import { togglePositionVisible } from '../actions/rankings';
+import { DraftToolbar } from '../components/DraftToolbar';
 import { GroupSelector } from '../components/GroupSelector';
 import { Player } from '../components/Player';
 import { PlayerGroup } from '../components/PlayerGroup';
@@ -64,17 +65,20 @@ class Rankings extends React.Component<any, RankingsState> {
     render() {
         return (
             <div className="Rankings">
-                {
-                    window.innerWidth < screenSizes.XL &&
-                    <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
-                }
-                <div className="groups">
-                    {this.renderGroups()}
+                <DraftToolbar />
+                <div className="ranks">
+                    {
+                        window.innerWidth < screenSizes.XL &&
+                        <GroupSelector visibleGroups={this.props.visibleGroups} togglePositionVisible={this.props.togglePositionVisible}></GroupSelector>
+                    }
+                    <div className="groups">
+                        {this.renderGroups()}
+                    </div>
+                    <Modal isOpen={this.state.isModalOpen} style={this.styles} onRequestClose={this.closeModal.bind(this)}>
+                        <FontAwesomeIcon icon="times" onClick={this.closeModal.bind(this)} size="lg"></FontAwesomeIcon>
+                        <Player></Player>
+                    </Modal>
                 </div>
-                <Modal isOpen={this.state.isModalOpen} style={this.styles} onRequestClose={this.closeModal.bind(this)}>
-                    <FontAwesomeIcon icon="times" onClick={this.closeModal.bind(this)} size="lg"></FontAwesomeIcon>
-                    <Player></Player>
-                </Modal>
             </div>
         );
     }

@@ -5,6 +5,7 @@ import { faEdit, faPlusSquare } from '@fortawesome/free-regular-svg-icons';
 import {
     faBars,
     faCheckSquare,
+    faChevronDown,
     faChevronLeft,
     faDoorOpen,
     faFileUpload,
@@ -46,6 +47,7 @@ library.add(faBars,
 	faEdit,
 	faPencilAlt,
 	faChevronLeft,
+	faChevronDown,
 	faTimes,
 	faSignOutAlt);
 

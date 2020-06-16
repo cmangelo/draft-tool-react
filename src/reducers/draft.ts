@@ -133,3 +133,8 @@ export const getTeams = (state: any) => Object.keys(state.draft.teams)
     })
     .sort((a, b) => a.position - b.position);
 export const getPreviousDrafts = (state: any) => state.draft.previousDrafts;
+export const getCurrentDraftState = (state: any) => ({
+    round: state.draft.currRound,
+    overall: state.draft.overall,
+    team: state.draft.currTeam
+});

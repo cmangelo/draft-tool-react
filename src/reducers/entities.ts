@@ -12,6 +12,8 @@ export interface EntitiesState {
     players: { [key: string]: IPlayer }
     tiers: { [key: string]: ITier }
     groups: { [key: string]: IGroup },
+    kickerId: string,
+    defenseId: string,
     loading: boolean
 }
 
@@ -19,6 +21,8 @@ const initialState: EntitiesState = {
     players: {},
     tiers: {},
     groups: {},
+    kickerId: '',
+    defenseId: '',
     loading: false
 }
 
@@ -34,6 +38,12 @@ export default function (state = initialState, action: { type: string, payload: 
             return {
                 ...state,
                 players: action.payload.players
+            }
+        case entitiesActionTypes.LOAD_SPECIAL_PLAYERS:
+            return {
+                ...state,
+                defenseId: action.payload.defenseId,
+                kickerId: action.payload.kickerId,
             }
         case entitiesActionTypes.LOAD_TIERS:
             return {
@@ -111,3 +121,5 @@ export default function (state = initialState, action: { type: string, payload: 
 export const getPlayers = (state: any) => state.entities.players;
 export const getTiers = (state: any) => state.entities.tiers;
 export const getGroups = (state: any) => state.entities.groups;
+export const getKickerId = (state: any) => state.entities.kickerId;
+export const getDefenseId = (state: any) => state.entities.defenseId;
