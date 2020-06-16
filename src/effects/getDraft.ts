@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
 import { loadDraft } from '../actions/draft';
+import { logoutUser } from '../actions/user';
 import { DraftState } from '../reducers/draft';
 import { get } from '../services/superagent';
 
@@ -12,8 +13,10 @@ export const getDraftEffect = () => {
             const draftJSON = response.body;
             dispatch(loadDraft(draftJSON));
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { userLoggedIn } from '../actions/user';
+import { loginUser } from '../actions/user';
 import { getIsUserLoggedIn } from '../reducers/user';
 import { post } from '../services/superagent';
 
@@ -23,7 +23,7 @@ export const Login: React.FC = (props: any) => {
             const json = JSON.stringify(response.body);
             localStorage.setItem('user', json)
             props.history.push('/drafts');
-            dispatch(userLoggedIn());
+            dispatch(loginUser());
         }, error => {
             if (error.status === 400) {
                 setErrorMessage('Invalid username or password');
@@ -43,7 +43,7 @@ export const Login: React.FC = (props: any) => {
             const json = response.body;
             localStorage.setItem('token', json.token)
             props.history.push('/drafts');
-            dispatch(userLoggedIn());
+            dispatch(loginUser());
         }, error => {
             if (error.status === 400) {
                 setErrorMessage('Invalid username or password');

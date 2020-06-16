@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
 import { loadDrafts } from '../actions/draft';
+import { logoutUser } from '../actions/user';
 import { get } from '../services/superagent';
 
 export const getPreviousDraftsEffect = () => {
@@ -10,8 +11,10 @@ export const getPreviousDraftsEffect = () => {
             const draftJSON = response.body;
             dispatch(loadDrafts(draftJSON))
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
     }
 }

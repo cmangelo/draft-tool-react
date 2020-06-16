@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
 import { loadDraft } from '../actions/draft';
+import { logoutUser } from '../actions/user';
 import { IDraft } from '../models/draft.interface';
 import { post } from '../services/superagent';
 
@@ -13,8 +14,10 @@ export const createDraftEffect = (draft: IDraft) => {
             dispatch(loadDraft({ draft: draftJSON, picks: [] }))
             return draftJSON._id;
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
     }
 }

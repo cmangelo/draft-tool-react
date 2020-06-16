@@ -3,11 +3,11 @@ export const userActionTypes = {
     USER_LOGGED_OUT: '[Logout] User Logged Out'
 };
 
-export const userLoggedIn = () => ({
+export const loginUser = () => ({
     type: userActionTypes.USER_LOGGED_IN
 });
 
-export const userLoggedOut = () => ({
+export const logoutUser = () => ({
     type: userActionTypes.USER_LOGGED_OUT
 });
 

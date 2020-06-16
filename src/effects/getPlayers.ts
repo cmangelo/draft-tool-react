@@ -2,6 +2,7 @@ import { push } from 'connected-react-router';
 import { normalize, schema } from 'normalizr';
 
 import { loadPlayers, loadSpecialPlayers } from '../actions/entities';
+import { logoutUser } from '../actions/user';
 import { EPosition } from '../models/enums/position.enum';
 import { IPlayer } from '../models/player.interface';
 import { get } from '../services/superagent';
@@ -20,8 +21,10 @@ export const getPlayersEffect = () => {
             dispatch(loadPlayers(players.entities.players as any));
             dispatch(getDraftEffect());
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
     }
 }

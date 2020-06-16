@@ -1,5 +1,6 @@
 import { push } from 'connected-react-router';
 
+import { logoutUser } from '../actions/user';
 import { getPlayerDetailSuccess, selectPlayer } from '../actions/user-ranks';
 import { EntitiesState } from '../reducers/entities';
 import { get } from '../services/superagent';
@@ -24,8 +25,10 @@ export const getPlayerDetailEffect = (playerId: string, navigate: boolean, inDra
                 dispatch(getPlayerDetailSuccess(response.body));
             }
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
     }
 }

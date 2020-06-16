@@ -1,6 +1,7 @@
 import { push } from 'connected-react-router';
 
 import { draftPlayer } from '../actions/rankings';
+import { logoutUser } from '../actions/user';
 import { DraftState } from '../reducers/draft';
 import { post } from '../services/superagent';
 
@@ -13,8 +14,10 @@ export const draftPlayerEffect = (playerId: string) => {
             const data = { overall: draft.overall - 1, player: playerId, draft: draft.draftId };
             await post(endpoint, data);
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
     }
 }

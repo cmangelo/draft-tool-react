@@ -2,6 +2,7 @@ import { push } from 'connected-react-router';
 import { normalize, schema } from 'normalizr';
 
 import { loadGroups, loadTiers } from '../actions/entities';
+import { logoutUser } from '../actions/user';
 import { get } from '../services/superagent';
 
 export const getGroupsAndTiersEffect = () => {
@@ -16,8 +17,10 @@ export const getGroupsAndTiersEffect = () => {
             dispatch(loadGroups(groups.entities.groups as any));
             dispatch(loadTiers(tiers.entities.tiers as any));
         } catch (err) {
-            if (err.status === 401)
+            if (err.status === 401) {
+                dispatch(logoutUser());
                 dispatch(push('/login'));
+            }
         }
 
     }
