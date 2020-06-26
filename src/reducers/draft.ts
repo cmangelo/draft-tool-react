@@ -1,5 +1,6 @@
 import { draftActionTypes } from '../actions/draft';
 import { rankingsActionTypes } from '../actions/rankings';
+import { userActionTypes } from '../actions/user';
 import { IDraft } from '../models/draft.interface';
 import { IPick } from '../models/pick.interface';
 
@@ -84,6 +85,8 @@ export default function (state = initialState, action: { type: string, payload: 
                 ...state,
                 draftId: action.payload
             }
+        case userActionTypes.USER_LOGGED_OUT:
+            return initialState;
         default:
             return state;
     }

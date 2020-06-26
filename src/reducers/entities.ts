@@ -1,6 +1,7 @@
 import { draftActionTypes } from '../actions/draft';
 import { entitiesActionTypes } from '../actions/entities';
 import { rankingsActionTypes } from '../actions/rankings';
+import { userActionTypes } from '../actions/user';
 import { userRanksActionTypes } from '../actions/user-ranks';
 import { UserRanking } from '../models/enums/user-ranking.enum';
 import { IGroup } from '../models/group.interface';
@@ -113,6 +114,8 @@ export default function (state = initialState, action: { type: string, payload: 
                     }
                 }
             }
+        case userActionTypes.USER_LOGGED_OUT:
+            return initialState;
         default:
             return state;
     }
