@@ -56,12 +56,16 @@ export const Login: React.FC = (props: any) => {
     return (
         <div className="Login">
             <img src={process.env.PUBLIC_URL + 'img/default-monochrome.svg'} alt="" />
+            <div className="toggle">
+                <span className={showLogin ? 'active' : ''} onClick={() => setShowLogin(true)}>Log In</span>
+                <span className={!showLogin ? 'active' : ''} onClick={() => setShowLogin(false)}>Create Account</span>
+            </div>
             {showLogin &&
                 <form action="" onSubmit={onLoginFormSubmit}>
                     <input type="text" placeholder="Username" name="username" />
                     <input type="password" placeholder="Password" name="password" />
                     <div className="error-message">{errorMessage}</div>
-                    <button type="submit">Log In</button>
+                    <button type="submit">Submit</button>
                 </form>
             }
             {!showLogin &&
@@ -70,10 +74,9 @@ export const Login: React.FC = (props: any) => {
                     <input type="text" placeholder="Username" name="username" />
                     <input type="password" placeholder="Password" name="password" />
                     <div className="error-message">{errorMessage}</div>
-                    <button type="submit">Create Account</button>
+                    <button type="submit">Submit</button>
                 </form>
             }
-            <p onClick={() => setShowLogin(!showLogin)}>{showLogin ? 'Create Account' : 'Log In'}</p>
         </div>
     );
 }

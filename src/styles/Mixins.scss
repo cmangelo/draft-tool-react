@@ -28,6 +28,12 @@
     }
 }
 
+@mixin for-med-desktop-up {
+    @media (min-width: 1550px) {
+        @content;
+    }
+}
+
 @mixin for-big-desktop-up {
     @media (min-width: 1800px) {
         @content;
