@@ -20,10 +20,7 @@ export const Login: React.FC = (props: any) => {
         const username = target.elements.username.value.trim();
         const password = target.elements.password.value.trim();
         post('users/login', { username, password }).then((response: any) => {
-            const json = JSON.stringify(response.body);
-            localStorage.setItem('user', json)
-            props.history.push('/drafts');
-            dispatch(loginUser());
+            loginSuccess(response);
         }, error => {
             if (error.status === 400) {
                 setErrorMessage('Invalid username or password');
@@ -40,10 +37,7 @@ export const Login: React.FC = (props: any) => {
         const username = target.elements.username.value.trim();
         const password = target.elements.password.value.trim();
         post('users', { username, password, name }).then((response: any) => {
-            const json = response.body;
-            localStorage.setItem('token', json.token)
-            props.history.push('/drafts');
-            dispatch(loginUser());
+            loginSuccess(response);
         }, error => {
             if (error.status === 400) {
                 setErrorMessage('Invalid username or password');
@@ -51,6 +45,13 @@ export const Login: React.FC = (props: any) => {
                 setErrorMessage('Something went wrong. Please try again');
             }
         });
+    }
+
+    const loginSuccess = (response: any) => {
+        const json = JSON.stringify(response.body);
+        localStorage.setItem('user', json)
+        props.history.push('/drafts');
+        dispatch(loginUser());
     }
 
     return (
