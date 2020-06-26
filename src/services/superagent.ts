@@ -3,7 +3,7 @@ import superagent from 'superagent';
 import { User } from '../models/user.interface';
 
 const localDev = false;
-const API_ROOT = localDev ? 'http://localhost:3001/' : 'https://draft-tool-api-test.herokuapp.com/';
+const API_ROOT = localDev ? 'http://localhost:3001/' : 'https://draft-tool-api.herokuapp.com/';
 
 export const getToken = () => {
     const userAsString = localStorage.getItem('user');

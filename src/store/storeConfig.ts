@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 import rootReducer from '../reducers';
 
-export const endpoint = true ? 'http://localhost:3000/' : 'http://157.245.231.113/api/';
+export const endpoint = true ? 'https://draft-tool-api.herokuapp.com/' : 'http://157.245.231.113/api/';
 
 
 export const history = createBrowserHistory();
