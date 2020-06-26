@@ -93,7 +93,7 @@ const App: React.FC = () => {
 	return (
 		<div className="App container">
 			<ConnectedRouter history={history} >
-				<Sidebar />
+				<Sidebar history={history} />
 				<div className="content">
 					<Switch>
 						{routes.filter(route => !route.onlyMobile || window.innerWidth < screenSizes.S)

@@ -7,7 +7,7 @@ import { logoutUser as logoutUserAction } from '../actions/user';
 import { getDraftId } from '../reducers/draft';
 import { getIsUserLoggedIn } from '../reducers/user';
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<any> = (props: { history: any }) => {
     const dispatch = useDispatch();
     const draftId: string = useSelector(getDraftId);
     const isUserLoggedIn: boolean = useSelector(getIsUserLoggedIn);
@@ -26,6 +26,7 @@ export const Sidebar: React.FC = () => {
 
     const logoutUser = () => {
         dispatch(logoutUserAction());
+        props.history.push('/login');
     }
 
     const getLinks = () => {
