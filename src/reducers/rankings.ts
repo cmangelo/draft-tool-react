@@ -1,5 +1,6 @@
 import { rankingsActionTypes } from '../actions/rankings';
 import { uiActionTypes } from '../actions/ui';
+import { userActionTypes } from '../actions/user';
 import { EPosition } from '../models/enums/position.enum';
 import { screenSizes } from '../services/window';
 
@@ -102,6 +103,8 @@ export default function (state = initialState, action: { type: string, payload: 
                 groupSelectionStack: declareStack(action.payload.screenWidth),
                 numVisibleGroups: Object.keys(visibleGroups).map(key => visibleGroups[parseInt(key)]).filter(x => x).length
             }
+        case userActionTypes.USER_LOGGED_OUT:
+            return initialState;
         default:
             return state;
     }

@@ -1,3 +1,4 @@
+import { userActionTypes } from '../actions/user';
 import { userRanksActionTypes } from '../actions/user-ranks';
 import { EPosition } from '../models/enums/position.enum';
 
@@ -34,6 +35,8 @@ export default function (state = initialState, action: { type: string, payload: 
                 ...state,
                 selectedPlayer: action.payload.playerId
             }
+        case userActionTypes.USER_LOGGED_OUT:
+            return initialState;
         default:
             return state
     }

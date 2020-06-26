@@ -21,7 +21,7 @@ import {
 import { ConnectedRouter } from 'connected-react-router';
 import React from 'react';
 import Modal from 'react-modal';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { Player } from './components/Player';
 import { Sidebar } from './components/Sidebar';
@@ -31,7 +31,7 @@ import CreateDraft from './views/CreateDraft';
 import DraftArena from './views/DraftArena';
 import DraftsLists from './views/DraftsList';
 import { FileUpload } from './views/FileUpload';
-import { Login } from './views/Login';
+import { LandingPage } from './views/LandingPage';
 import UserRanks from './views/UserRanks';
 
 library.add(faBars,
@@ -54,7 +54,7 @@ library.add(faBars,
 const routes = [
 	{
 		path: '/login',
-		main: (props: any) => <Login {...props} />
+		main: (props: any) => <LandingPage {...props} />
 	},
 	{
 		path: '/drafts/create',
@@ -80,6 +80,10 @@ const routes = [
 	{
 		path: '/players',
 		main: (props: any) => <UserRanks {...props} />
+	},
+	{
+		path: '/',
+		main: (props: any) => <LandingPage {...props} />
 	}
 ];
 
@@ -99,6 +103,7 @@ const App: React.FC = () => {
 									path={route.path}
 									render={(props: any) => route.main(props)} />
 							))}
+						<Redirect from="/" to="/drafts" exact />
 					</Switch>
 				</div>
 			</ConnectedRouter>

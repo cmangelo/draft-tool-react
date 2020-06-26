@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
+import { logoutUser as logoutUserAction } from '../actions/user';
 import { getDraftId } from '../reducers/draft';
 import { getIsUserLoggedIn } from '../reducers/user';
 
@@ -24,7 +25,7 @@ export const Sidebar: React.FC = () => {
     }
 
     const logoutUser = () => {
-        dispatch(logoutUser());
+        dispatch(logoutUserAction());
     }
 
     const getLinks = () => {
