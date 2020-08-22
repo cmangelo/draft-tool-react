@@ -20,7 +20,10 @@ export default function (state = initialState, action: { type: string, payload: 
             }
         case userActionTypes.USER_LOGGED_OUT:
             localStorage.removeItem('user');
-            return initialState;
+            return {
+                ...initialState,
+                isLoggedIn: false
+            };
         default:
             const userAsString = localStorage.getItem('user');
             if (!userAsString)
